@@ -10,3 +10,9 @@ from wtforms.validators import DataRequired, Length, NumberRange, Optional
 # from app.models import Book
 
 __author__ = 'JiangWen'
+
+
+class LoginForm(FlaskForm):
+    username = StringField("username", validators=[DataRequired()])
+    password = PasswordField('passsword', validators=[DataRequired()])
+    remember = BooleanField("remember", validators=[Optional()], default=False)
