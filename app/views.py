@@ -64,4 +64,4 @@ def login():
         flash('Invalid input', 'warning')
     if error is not None:
         flash(error, category='danger')
-    return render_template('login.html', form=form, error=error)
+    return render_template('index.html', form=form, error=error)
