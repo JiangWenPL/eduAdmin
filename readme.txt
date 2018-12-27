@@ -1,3 +1,4 @@
+login 缺少submit事件
 contact 缺少submit事件
 forum 缺少课程选择、submit、评论显示
 media 缺少视频读取
