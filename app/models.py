@@ -34,12 +34,11 @@ class User(db.Model):
     def get_id(self):
         return self.id
 
-    def __init__(self, id, password, is_root=False):
+    def __init__(self, id, name, password, is_root=False):
         self.id = id
         self.name = name
         self.password = password
         self.is_root = is_root
-        self.user_type = user_type
 
     @property
     def password(self):
@@ -58,4 +57,4 @@ class User(db.Model):
 
 
 def test_init():
-    db.session.add(User('Alice', '123'))
+    db.session.add(User('316010', 'Alice', '123'))
