@@ -21,6 +21,8 @@ def init_view():
     db.drop_all()
     db.create_all()  # Do not recreate mysql database.
     test_init()
+    db.session.commit()
+
     # Add login guider
     lm.login_view = url_for('login')
     lm.login_message = "Please login"
@@ -37,62 +39,77 @@ def index():
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
     return render_template("index.html")
 
+
 @app.route('/Tindex.html')
 def Tindex():
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
     return render_template("Tindex.html")
 
+
 @app.route('/contact.html')
 def contact():
     return render_template('contact.html')
+
 
 @app.route('/courseDemo.html')
 def courseDemo():
     return render_template('courseDemo.html')
 
+
 @app.route('/forum.html')
 def forum():
     return render_template('forum.html')
+
 
 @app.route('/homework.html')
 def homework():
     return render_template('homework.html')
 
+
 @app.route('/homeworkDemo.html')
 def homeworkDemo():
     return render_template('homeworkDemo.html')
+
 
 @app.route('/info.html')
 def info():
     return render_template('info.html')
 
+
 @app.route('/media.html')
 def media():
     return render_template('media.html')
+
 
 @app.route('/signUp.html')
 def signUp():
     return render_template('signUp.html')
 
+
 @app.route('/TcourseDemo.html')
 def TcourseDemo():
     return render_template('TcourseDemo.html')
+
 
 @app.route('/Thomework.html')
 def Thomework():
     return render_template('Thomework.html')
 
+
 @app.route('/Tinfo.html')
 def Tinfo():
     return render_template('Tinfo.html')
+
 
 @app.route('/Tmedia.html')
 def Tmedia():
     return render_template('Tmedia.html')
 
+
 @app.route('/signUp.html')
 def signUpp():
     return render_template('signUp.html')
+
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
