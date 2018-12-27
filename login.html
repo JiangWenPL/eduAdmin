@@ -148,6 +148,7 @@
                     <div class="contact_form">
                         <h3><i class="fa fa-envelope-o grd1 global-radius"></i>login</h3>
                         <form class="row" action="{{ url_for('login') }}"  method="post">
+                            {{form.hiddden_tag()}}
                             <fieldset class="row-fluid">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="text" name="username" id="username" class="form-control" placeholder="User ID">
