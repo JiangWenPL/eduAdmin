@@ -1,4 +1,0 @@
-T开头文件为教师界面
-教师部分超链接均未设置
-courseDemo从index中点击进入
-homeworkDemo从homework中点击进入
