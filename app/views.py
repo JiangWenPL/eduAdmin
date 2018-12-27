@@ -37,6 +37,10 @@ def index():
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
     return render_template("index.html")
 
+@app.route('/Tindex.html')
+def Tindex():
+    # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
+    return render_template("Tindex.html")
 
 @app.route('/contact.html')
 def contact():
@@ -84,8 +88,13 @@ def Tinfo():
 
 @app.route('/Tmedia.html')
 def Tmedia():
-    return render_template('Tmedia')
+    return render_template('Tmedia.html')
 
+@app.route('/signUp.html')
+def signUpp():
+    return render_template('signUp.html')
+
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
