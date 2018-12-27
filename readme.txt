@@ -1,7 +1,4 @@
-login 缺少submit事件
-contact 缺少submit事件
-forum 缺少课程选择、submit、评论显示
-media 缺少视频读取
-homework 缺少读取
-infomation 缺少读取消息
-home 缺少读取课程
+T开头文件为教师界面
+教师部分超链接均未设置
+courseDemo从index中点击进入
+homeworkDemo从homework中点击进入
