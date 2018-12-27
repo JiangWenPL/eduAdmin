@@ -135,13 +135,16 @@
 
 
 
+                    {% if Total %}
+                    {%for row in Total%}
                         <div class="testimonial clearfix">                           
                             <div class="testi-meta">
-                                <h4>Xin Wei</h4>
+                                <h4>{{ row.name }}</h4>
                             </div>
-                                <h3>本周五访谈，请同学不要迟到</h3>
+                                <h3>{{ row.details }}</h3>
                         </div>
-
+                    {% endfor %}
+                    {% endif %}   
 
 
             

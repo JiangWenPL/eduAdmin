@@ -87,7 +87,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>CourseName</h2>
+                    {% if courseInfo %}
+                    <h2>{{courseInfo.name}}</h2>
+                    {% endif %}
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
@@ -102,10 +104,12 @@
     
     <div id="features" class="section wb">
     <div class="container">
-        <div class="section-title row text-center">
+<div class="section-title row text-center">
             <div class="col-md-8 col-md-offset-2">
-                <h3>CourseName</h3>
-                <p class="lead">Description of the homework Description of the homeworkDescription of the homework Description of the homework Description of the homework Description of the homework Description of the homework Description of the homework</p>
+                {% if courseInfo %}
+                <h3>{{courseInfo.name}}</h3>
+                <p class="lead">{{courseInfo.details}}</p>
+                {% endif %}
             </div><!-- end col -->
         </div><!-- end title -->
         

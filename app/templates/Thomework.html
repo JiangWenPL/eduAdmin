@@ -138,15 +138,17 @@
 
 
 
-    <div id="testimonials" class="section lb">
+     <div id="testimonials" class="section lb">
         <div class="container">
 
-                        <div class="testimonial clearfix">                           
+                    {% if Total %}
+                    {%for row in Total%}
+                        <div class="testimonial clearfix">           
                             <i class="fa fa-envelope" aria-hidden="true" style="float:left"></i>
-                            <a href="../static/homeworkDemo.html"><strong>完成UML图的设计（用例图、协作图、时序图）</strong></a>
-                            <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius grd1 btn-brd" >Download</button>
+                            <a href="{{ row.url }}"><strong>{{ row.name }}</strong></a>
                         </div>
-
+                    {% endfor %}
+                    {% endif %}   
                         
 
                             <!-- end testi-meta -->

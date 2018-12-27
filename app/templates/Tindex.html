@@ -108,77 +108,43 @@
                 <p class="lead">following are the class you attended.</p>
             </div><!-- end col -->
         </div><!-- end title -->
-        
-        <hr class="invis"> 
+                <hr class="invis"> 
 
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="service-widget">
-                    <div class="property-main">
-                        <div class="property-wrap">
-                            <figure class="post-media wow fadeIn">
-                                <a href="../static/uploads/class1.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                                <img src="../static/uploads/class1.jpg" alt="" class="img-responsive">
-                                <div class="label-inner">
-                                    <span class="label-status label">New Info</span>
-                                </div>
-                            </figure>
-                            <div class="item-body">
-                                <h3>Operation system</h3>
-                                <div class="adderess">
-                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                    Main teaching building 4 503
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-foot">
-                            <div class="pull-left">
-                                <span class="prop-user-agent">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    Ji Jiangming
-                                </span>
-                            </div>
-                            <div class="pull-right">
-                                <span class="prop-date">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    Monday 345
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end service -->
-            </div>
+
+                    {% if Total %}
+                    {%for row in Total%}
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="service-widget">
                     <div class="property-main">
                         <div class="property-wrap">
                             <figure class="post-media wow fadeIn">
-                                <a href="../static/uploads/class2.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                                <img src="../static/uploads/class2.jpg" alt="" class="img-responsive">
+                                <a href="{{ row.courseDetail }}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+                                <img src="{{ row.imgURL }}" alt="" class="img-responsive">
                                 <div class="label-inner">
                                   
                                 </div>
                             </figure>
                             <div class="item-body">
-                                <h3>Java</h3>
+                                <h3>{{ row.name }}</h3>
 
                                 <div class="adderess">
                                     <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                    Wai Jingmao Building 101
+                                    {{ row.location }}
                                 </div>
                             </div>
                             <div class="item-foot">
                                 <div class="pull-left">
                                     <span class="prop-user-agent">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        Lun Weiming
+                                        {{ row.teacher }}
                                     </span>
                                 </div>
                                 <div class="pull-right">
                                     <span class="prop-date">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        Thursday 34
+                                        {{ row.time }}
                                     </span>
                                 </div>
                             </div>
@@ -187,40 +153,9 @@
                 </div><!-- end service -->
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="service-widget">
-                    <div class="property-main">
-                        <div class="property-wrap">
-                            <figure class="post-media wow fadeIn">
-                                <a href="../static/uploads/class3.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                                <img src="../static/uploads/class3.jpg" alt="" class="img-responsive">
-                            </figure>
-                            <div class="item-body">
-                                <h3>Software Engineering</h3>
+                    {% endfor %}
+                    {% endif %} 
 
-                                <div class="adderess">
-                                    <i class="fa fa-map-pin" aria-hidden="true"></i> 
-                                    CaoGuangBiao Building 201
-                                </div>
-                            </div>
-                            <div class="item-foot">
-                                <div class="pull-left">
-                                    <span class="prop-user-agent">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        Xin Wei
-                                    </span>
-                                </div>
-                                <div class="pull-right">
-                                    <span class="prop-date">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        Friday 345
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end service -->
-            </div>
         </div><!-- end row -->
     </div><!-- end container -->
 </div><!-- end section -->
