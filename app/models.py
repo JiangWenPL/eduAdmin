@@ -21,7 +21,6 @@ class User(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     password_hash = db.Column(db.String(32))
     user_type = db.Column(db.String(32), default="guest")
-    name = db.Column(db.String(32))
 
     def is_authenticated(self):
         return True
@@ -35,13 +34,12 @@ class User(db.Model):
     def get_id(self):
         return self.id
 
-    def __init__(self, id, password, name, is_root=False):
+    def __init__(self, id, password, is_root=False):
         self.id = id
         self.name = name
         self.password = password
         self.is_root = is_root
-        if id == 'Alice':
-            self.user_type = "admin"
+        self.user_type = user_type
 
     @property
     def password(self):
@@ -57,44 +55,6 @@ class User(db.Model):
     # For debug
     def __repr__(self):
         return '<User %r>' % self.id
-
-
-class Course(db.Model):
-    __tablename__ = "course"
-
-    id = db.Column(db.String(32), primary_key=True)
-    name = db.Column(db.String(32))
-    teacher_id = db.Column(db.String(32), db.ForeignKey("user.id"))
-    course_url = db.Column(db.String(128))
-    time = db.Column(db.String(32))
-
-    def __init__(self, id, name, teacher_id, course_url, time):
-        self.id = id
-        self.name = name
-        self.teacher_id = teacher_id
-        self.course_url = course_url
-        self.time = time
-
-
-class TakingClass(db.Model):
-    __tablename__ = "takingClass"
-
-    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
-    student_id = db.Column(db.String(32), db.ForeignKey("user.id"))
-
-    def __init__(self, course_id, student_id):
-        self.course_id = course_id
-        self.student_id = student_id
-
-
-class Homework(db.Model):
-    __tablename__ = "homework"
-
-    id = db.Column(db.String(32), primary=True)
-    name = db.Column(db.String(32))
-    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
-    description = db.Column(db.String(256))
-    deadline = db.Column(db.DateTime)
 
 
 def test_init():

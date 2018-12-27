@@ -34,6 +34,11 @@ def before_request():
     g.user = current_user
 
 
+@lm.user_loader
+def load_user(uid):
+    return User.query.get(uid)
+
+
 @app.route('/index.html')
 def index():
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
@@ -119,6 +124,7 @@ def login():
         flash("You have logged in to system")
         return redirect(url_for('index'))
     form = LoginForm()
+
     if form.validate_on_submit():
         try:
             user = User.query.filter_by(id=form.username.data).first()

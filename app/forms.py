@@ -14,5 +14,5 @@ __author__ = 'JiangWen'
 
 class LoginForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
-    password = PasswordField('passsword', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
     remember = BooleanField("remember", validators=[Optional()], default=False)
