@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
  
      <!-- Site Metas -->
-    <title>作业</title>  
+    <title>主页</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -35,8 +35,8 @@
     <script src="../static/js/modernizer.js"></script>
 
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="../static/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="../static/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -62,35 +62,37 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Tindex.html">Home</a></li>
+                        <li><a class="active" href="Tindex.html">Home</a></li>
                         <li><a href="Tinfo.html">Information</a></li>
-                        <li><a class="active" href="Thomework.html">homework</a></li>
+                        <li><a href="Thomework.html">Homework</a></li>
                         <li><a href="Tmedia.html">Media</a></li>
                         <li><a href="forum.html">Forum</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li class="search-option">
-                            <button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            <form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
-                                <input type="text" placeholder="Search....">
-                                <button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </form>
-                       </li> 
+
+						<li class="search-option">
+							<button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
+								<input type="text" placeholder="Search....">
+								<button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</form>
+					   </li> 
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
-    <div class="all-title-box">
+
+	
+	   <div class="all-title-box">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Homework</h2>
+                    <h2>Course</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
                             <li><a href="../static/#">Home</a></li>
-                            <li>Homework</li>
+                            <li>List</li>
                         </ul>
                     </nav>
                 </div>
@@ -98,69 +100,131 @@
         </div>
     </div>
     
+    <div id="features" class="section wb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>Your Course</h3>
+                <p class="lead">following are the class you attended.</p>
+            </div><!-- end col -->
+        </div><!-- end title -->
+        
+        <hr class="invis"> 
 
-
-                    <div class="contact_form">
-                        <form id="contactform1" class="row" name="contactform" method="post">
-                            <fieldset class="row-fluid">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="sr-only">Which course?</label>
-                                    <select name="select_price1" id="select_course" class="selectpicker form-control" data-style="btn-white">
-                                        <option value="OS">OS</option>
-                                        <option value="Java">Java</option>
-                                        <option value="SRE">SRE</option>
-                                    </select>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="service-widget">
+                    <div class="property-main">
+                        <div class="property-wrap">
+                            <figure class="post-media wow fadeIn">
+                                <a href="../static/uploads/class1.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+                                <img src="../static/uploads/class1.jpg" alt="" class="img-responsive">
+                                <div class="label-inner">
+                                    <span class="label-status label">New Info</span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
+                            </figure>
+                            <div class="item-body">
+                                <h3>Operation system</h3>
+                                <div class="adderess">
+                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                    Main teaching building 4 503
                                 </div>
-                            </fieldset>
-                        </form>
-                    </div>
-
-
-
-                    <form class="container" action=""  method="post">
-                            
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" name="title" id="HomeworkTitle" class="form-control" placeholder="Homework Title">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <p><textarea name="content" class="form-control" rows="6"></textarea></p>
-                                </div>
-                                 <div class="testimonial clearfix">
-                                    <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius grd1 btn-brd" >Submit</button>
-                                 </div>
-                            
-                    </form>
-
-
-
-
-
-    <div id="testimonials" class="section lb">
-        <div class="container">
-
-                        <div class="testimonial clearfix">                           
-                            <i class="fa fa-envelope" aria-hidden="true" style="float:left"></i>
-                            <a href="../static/homeworkDemo.html"><strong>完成UML图的设计（用例图、协作图、时序图）</strong></a>
-                            <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius grd1 btn-brd" >Download</button>
+                            </div>
                         </div>
+                        <div class="item-foot">
+                            <div class="pull-left">
+                                <span class="prop-user-agent">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Ji Jiangming
+                                </span>
+                            </div>
+                            <div class="pull-right">
+                                <span class="prop-date">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    Monday 345
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end service -->
+            </div>
 
-                        
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="service-widget">
+                    <div class="property-main">
+                        <div class="property-wrap">
+                            <figure class="post-media wow fadeIn">
+                                <a href="../static/uploads/class2.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+                                <img src="../static/uploads/class2.jpg" alt="" class="img-responsive">
+                                <div class="label-inner">
+                                  
+                                </div>
+                            </figure>
+                            <div class="item-body">
+                                <h3>Java</h3>
 
-                            <!-- end testi-meta -->
-                        
-            
-                        
+                                <div class="adderess">
+                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                    Wai Jingmao Building 101
+                                </div>
+                            </div>
+                            <div class="item-foot">
+                                <div class="pull-left">
+                                    <span class="prop-user-agent">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        Lun Weiming
+                                    </span>
+                                </div>
+                                <div class="pull-right">
+                                    <span class="prop-date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        Thursday 34
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end service -->
+            </div>
 
-                        
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="service-widget">
+                    <div class="property-main">
+                        <div class="property-wrap">
+                            <figure class="post-media wow fadeIn">
+                                <a href="../static/uploads/class3.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+                                <img src="../static/uploads/class3.jpg" alt="" class="img-responsive">
+                            </figure>
+                            <div class="item-body">
+                                <h3>Software Engineering</h3>
 
-                    </div><!-- end carousel -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
+                                <div class="adderess">
+                                    <i class="fa fa-map-pin" aria-hidden="true"></i> 
+                                    CaoGuangBiao Building 201
+                                </div>
+                            </div>
+                            <div class="item-foot">
+                                <div class="pull-left">
+                                    <span class="prop-user-agent">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        Xin Wei
+                                    </span>
+                                </div>
+                                <div class="pull-right">
+                                    <span class="prop-date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        Friday 345
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end service -->
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+
 
 
     <footer class="footer">
@@ -242,7 +306,7 @@
     <!-- ALL PLUGINS -->
     <script src="../static/js/custom.js"></script>
     <script src="../static/js/portfolio.js"></script>
-    <script src="../static/js/hoverdir.js"></script>
+    <script src="../static/js/hoverdir.js"></script>    
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
    <!-- MAP & CONTACT -->
     <script src="../static/js/map.js"></script>
