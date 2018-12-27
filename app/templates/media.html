@@ -90,7 +90,7 @@
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
-							<li><a href="../static/#">Home</a></li>
+							<li><a href="#">Home</a></li>
 							<li>Media</li>
 						</ul>
 					</nav>
@@ -109,6 +109,8 @@
             </div><!-- end title -->
 
             <div id="da-thumbs" class="da-thumbs portfolio">
+
+
                 <div class="post-media_g pitem item-w1 item-h1 cat1">
                     <a href="../static/uploads/course_01.jpg" data-rel="prettyPhoto[gal]">
                         <img src="../static/uploads/course_01.jpg" alt="" class="img-responsive">
@@ -117,47 +119,22 @@
                         </div>
                     </a>
                 </div>
-                <div class="post-media_g pitem item-w1 item-h1 cat2">
-                    <a href="../static/uploads/course_02.jpg" data-rel="prettyPhoto[gal]">
-                        <img src="../static/uploads/course_02.jpg" alt="" class="img-responsive">
-                        <div>
-                            <i class="flaticon-unlink"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="post-media_g pitem item-w1 item-h1 cat1">
-                    <a href="../static/uploads/course_03.jpg" data-rel="prettyPhoto[gal]">
-                        <img src="../static/uploads/course_03.jpg" alt="" class="img-responsive">
-                        <div>
-                            <i class="flaticon-unlink"></i>
-                        </div>
-                    </a>
-                </div>
 
-                <div class="post-media_g pitem item-w1 item-h1 cat3">
-                    <a href="../static/uploads/course_04.jpg" data-rel="prettyPhoto[gal]">
-                        <img src="../static/uploads/course_04.jpg" alt="" class="img-responsive">
-                        <div>
-                            <i class="flaticon-unlink"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="post-media_g pitem item-w1 item-h1 cat2">
-                    <a href="../static/uploads/course_05.jpg" data-rel="prettyPhoto[gal]">
-                        <img src="../static/uploads/course_05.jpg" alt="" class="img-responsive">
-                        <div>
-                            <i class="flaticon-unlink"></i>
-                        </div>
-                    </a>
-                </div>
+                    {% if Total %}
+                    {%for row in Total%}
                 <div class="post-media_g pitem item-w1 item-h1 cat1">
-                    <a href="../static/uploads/course_06.jpg" data-rel="prettyPhoto[gal]">
-                        <img src="../static/uploads/course_06.jpg" alt="" class="img-responsive">
+                    <a href="{{ row.url }}" data-rel="prettyPhoto[gal]">
+                        <img src="{{ row.img }}" alt="" class="img-responsive">
                         <div>
                             <i class="flaticon-unlink"></i>
                         </div>
                     </a>
                 </div>
+                    {% endfor %}
+                    {% endif %}    
+
+
+                
             </div><!-- end portfolio -->
         </div><!-- end container -->
     </div><!-- end section -->

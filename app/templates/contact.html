@@ -42,6 +42,7 @@
 </head>
 <body class="realestate_version">
 
+
     <!-- LOADER -->
     <div id="preloader">
         <span class="loader"><span class="loader-inner"></span></span>
@@ -89,7 +90,7 @@
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
-							<li><a href="../static/#">Home</a></li>
+							<li><a href="#">Home</a></li>
 							<li>Contact</li>
 						</ul>
 					</nav>
@@ -109,7 +110,8 @@
                 <div class="col-md-6">
                     <div class="contact_form">
                         <div id="message"></div>
-                        <form id="contactform" class="row" action="contact.php" name="contactform" method="post">
+                        <form id="contactform" class="row" action="{{ url_for('contatct') }}" name="contactform" method="post">
+                            {{form.hidden_tag()}}
                             <fieldset class="row-fluid">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" name="name" id="name" class="form-control" placeholder="name">

@@ -87,11 +87,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>HomeworkName</h2>
+                    {% if homework %}
+                    <h2>{{ homework.name }}</h2>
+                    {% endif %}    
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li><a href="../static/#">Homework</a></li>
+                            <li><a href="#">Homework</a></li>
                             <li>List</li>
                         </ul>
                     </nav>
@@ -104,8 +106,10 @@
     <div class="container">
         <div class="section-title row text-center">
             <div class="col-md-8 col-md-offset-2">
-                <h3>HomeworkName</h3>
-                <p class="lead">Description of the homework Description of the homeworkDescription of the homework Description of the homework Description of the homework Description of the homework Description of the homework Description of the homework</p>
+                {% if homework %}
+                <h3>{{ homework.name }}</h3>
+                <p class="lead">{{ homework.details }}</p>
+                {% endif %}
             </div><!-- end col -->
         </div><!-- end title -->
         

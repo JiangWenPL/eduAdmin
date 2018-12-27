@@ -112,7 +112,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
+                                    <button  type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -128,14 +128,16 @@
         <div class="container">
 
 
-
+                    {% if Total %}
+                    {%for row in Total%}
                         <div class="testimonial clearfix">                           
                             <div class="testi-meta">
-                                <h4>Xin Wei</h4>
+                                <h4>{{ row.name }}</h4>
                             </div>
-                                <h3>本周五访谈，请同学不要迟到</h3>
+                                <h3>{{ row.details }}</h3>
                         </div>
-
+                    {% endfor %}
+                    {% endif %}   
 
 
             

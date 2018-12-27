@@ -89,7 +89,7 @@
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
-							<li><a href="../static/#">Home</a></li>
+							<li><a href="#">Home</a></li>
 							<li>Forum</li>
 						</ul>
 					</nav>
@@ -105,14 +105,14 @@
                             <fieldset class="row-fluid">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="sr-only">Which course?</label>
-                                    <select name="select_price1" id="select_course" class="selectpicker form-control" data-style="btn-white">
+                                    <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
                                         <option value="OS">OS</option>
                                         <option value="Java">Java</option>
                                         <option value="SRE">SRE</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
+                                    <button  type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -121,7 +121,7 @@
 
         <div class="testimonial clearfix">
             <p><textarea name="content" class="form-control" rows="6"></textarea></p>
-            <button  type="button" onclick="myFunction()" class="btn btn-light btn-radius grd1 btn-brd" >Submit</button>
+            <button  type="button"  class="btn btn-light btn-radius grd1 btn-brd" >Submit</button>
         </div>
 
 
@@ -129,72 +129,19 @@
 
     <div id="testimonials" class="section lb">
         <div class="container">
-
+                    {% if Total %}
+                    {%for row in Total%}
                         <div class="testimonial clearfix">
                             <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
+                                <h4>{{ row.name }}<small>- {{ row.id }}</small></h4>
                             </div>
                             <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 第五题怎么做？ <i class="fa fa-quote-right"></i></h3>
+                                <h3><i class="fa fa-quote-left"></i> {{ row.details }} <i class="fa fa-quote-right"></i></h3>
                             </div>
-
-                            <!-- end testi-meta -->
                         </div>
-                        <!-- end testimonial -->
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
-                            </div>
-                            <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 第四题怎么做？ <i class="fa fa-quote-right"></i></h3>
-                            </div>
-
-                            <!-- end testi-meta -->
-                        </div>
-
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
-                            </div>
-                            <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 第三题怎么做？ <i class="fa fa-quote-right"></i></h3>
-                            </div>
-
-                            <!-- end testi-meta -->
-                        </div>
+                    {% endfor %}
+                    {% endif %}    
                         
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
-                            </div>
-                            <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 第二题怎么做？ <i class="fa fa-quote-right"></i></h3>
-                            </div>
-
-                            <!-- end testi-meta -->
-                        </div>
-
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
-                            </div>
-                            <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 第一题怎么做？ <i class="fa fa-quote-right"></i></h3>
-                            </div>
-
-                            <!-- end testi-meta -->
-                        </div>
-
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>二狗 <small>- 3160100000</small></h4>
-                            </div>
-                            <div class="desc">
-                                <h3><i class="fa fa-quote-left"></i> 作业怎么做？ <i class="fa fa-quote-right"></i></h3>
-                            </div>
-
-                            <!-- end testi-meta -->
-                        </div>               
                         
 
                         

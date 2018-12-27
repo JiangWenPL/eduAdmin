@@ -34,8 +34,17 @@ def before_request():
 
 @app.route('/index.html')
 def index():
+
+    class Total:
+        def __init__(self):
+            self.name = 'This is name'
+            self.location = "location"
+            self.teacher = 'teacher'
+            self.time = 'teacher'
+            self.imgURL = '../static/uploads/class2.jpg'
+            self.courseDetail = 'courseDemo'
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
-    return render_template("index.html")
+    return render_template("index.html", Total = [Total()]*10)
 
 @app.route('/Tindex.html')
 def Tindex():
@@ -48,27 +57,54 @@ def contact():
 
 @app.route('/courseDemo.html')
 def courseDemo():
-    return render_template('courseDemo.html')
+    class CourseInfo:
+        def __init__(self):
+            self.name = 'This is name'
+            self.details = 'This id details balabala'
+    return render_template('courseDemo.html', courseInfo = CourseInfo())
 
 @app.route('/forum.html')
 def forum():
-    return render_template('forum.html')
+    class Total:
+        def __init__(self):
+            self.name = 'This is name'
+            self.id = 'This is id'
+            self.details = 'This is details balabala'
+
+
+    return render_template('forum.html', Total = [Total()]*10)
 
 @app.route('/homework.html')
 def homework():
-    return render_template('homework.html')
+    class HomeworkInfo:
+        def __init__(self):
+            self.name = 'This is name'
+            self.url = "homeworkDemo.html"
+    return render_template('homework.html', Total = [HomeworkInfo()]*10)
 
 @app.route('/homeworkDemo.html')
 def homeworkDemo():
-    return render_template('homeworkDemo.html')
+    class HomeworkInfo:
+        def __init__(self):
+            self.name = 'This is name'
+            self.details = "fdasfasdfasdfasdfasd"
+    return render_template('homeworkDemo.html', homework = HomeworkInfo())
 
 @app.route('/info.html')
 def info():
-    return render_template('info.html')
+    class Info:
+        def __init__(self):
+            self.name = 'This is name'
+            self.details = "fdasfasdfasdfasdfasd"
+    return render_template('info.html',Total = [Info()]*10)
 
 @app.route('/media.html')
 def media():
-    return render_template('media.html')
+    class Info:
+        def __init__(self):
+            self.url = 'courseDemo'
+            self.img = "../static/uploads/course_01.jpg"
+    return render_template('media.html',Total = [Info()]*10)
 
 @app.route('/signUp.html')
 def signUp():
