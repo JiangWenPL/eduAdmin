@@ -18,8 +18,8 @@ Bootstrap(app)
 @app.before_first_request
 def init_view():
     # Uncomment to recreate database every time
-    db.drop_all(bind=None)
-    db.create_all(bind=None)  # Do not recreate mysql database.
+    db.drop_all()
+    db.create_all()  # Do not recreate mysql database.
     test_init()
     # Add login guider
     lm.login_view = url_for('login')
