@@ -62,7 +62,7 @@ class Course(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     name = db.Column(db.String(32))
     teacher_id = db.Column(db.String(32), db.ForeignKey("user.id"))
-    course_url = db.Column(db.String(128))
+    course_url = db.Column(db.String(128))  # preview picture
     time = db.Column(db.String(32))
 
     def __init__(self, id, name, teacher_id, course_url, time):
@@ -88,11 +88,63 @@ class TakingClass(db.Model):
 class Homework(db.Model):
     __tablename__ = "homework"
 
-    id = db.Column(db.String(32), primary_key=True)
+    id = db.Column(db.String(32), primary_key=True, autoincrement=True)
     name = db.Column(db.String(32))
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime)
+
+    def __init__(self, name, course_id, description, deadline):
+        self.name = name
+        self.course_id = course_id
+        self.description = description
+        self.deadline = deadline
+
+
+class StudentHomework(db.Model):
+    __tablename__ = "studentHomework"
+
+    id = db.Column(db.String(32), primary_key=True, autoincrement=True)
+    homework_id = db.Column(db.String(32), db.ForeignKey("homework.id"))
+    student_id = db.Column(db.String(32), db.ForeignKey("user.id"))
+    homework_url = db.Column(db.String(128))
+    grade = db.Column(db.Integer, default=-1)  # grade == -1 means that the homework hasn't been marked
+
+    def __init__(self, homework_id, student_id, homework_url):
+        self.student_id = student_id
+        self.homework_id = homework_id
+        self.homework_url = homework_url
+
+
+class Post(db.Model):
+    __tablename__ = "post"
+
+    post_id = db.Column(db.String(32), primary_key=True, autoincrement=True)
+    post_topic = db.Column(db.String(32))
+    user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
+    # a course is corresponding to a module
+    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
+
+    def __init__(self, post_topic, user_id, course_id):
+        self.post_topic = post_topic
+        self.course_id = course_id
+        self.user_id = user_id
+
+
+class Message(db.Model):  # A floor in a post
+    __tablename__ = "message"
+
+    message_id = db.Column(db.String(32), primary_key=True, autoincrement=True)
+    post_id = db.Column(db.String(32), db.ForeignKey("post.id"))
+    user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
+    description = db.Column(db.String(256))
+    floor = db.Column(db.Integer)
+
+    def __init__(self, post_id, user_id, description, floor):
+        self.post_id = post_id
+        self.user_id = user_id
+        self.description = description
+        self.floor = floor
 
 
 def test_init():
