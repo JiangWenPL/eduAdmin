@@ -93,6 +93,7 @@ def homework():
         def __init__(self):
             self.name = 'This is name'
             self.url = "homeworkDemo.html"
+            self.grade = 99
 
     return render_template('homework.html', Total=[HomeworkInfo()] * 10)
 
