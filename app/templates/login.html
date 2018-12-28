@@ -83,6 +83,12 @@
 
 </head>
 <body class="realestate_version">
+
+<!-- LOADER -->
+<div id="preloader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div><!-- end loader -->
+<!-- END LOADER -->
     <div class="container">
                {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
@@ -97,13 +103,6 @@
                     {% endif %}
                 {% endwith %}
            </div>
-
-<!-- LOADER -->
-<div id="preloader">
-    <span class="loader"><span class="loader-inner"></span></span>
-</div><!-- end loader -->
-<!-- END LOADER -->
-
 <header class="header header_style_01">
     <nav class="megamenu navbar navbar-default">
         <div class="container-fluid">
@@ -175,17 +174,22 @@
                                 <input type="password" name="password" id="password" placeholder="Password"
                                        required="" class="form-control">
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <input type="text" name="Verification" placeholder="Verification Code" required=""
                                        class="form-control">
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <img src="../static/uploads/checkCode.png">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <input type="checkbox" class="btn btn-light btn-radius btn-brd grd1 btn-block"><label class='form-check-label' for=0>remember me</label>
+                                </input>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                                 <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">login
                                 </button>
                             </div>
+
                         </fieldset>
                     </form>
                 </div>

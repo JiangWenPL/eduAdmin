@@ -144,8 +144,13 @@
                     {% if Total %}
                     {%for row in Total%}
                         <div class="testimonial clearfix">           
-                            <i class="fa fa-envelope" aria-hidden="true" style="float:left"></i>
-                            <a href="{{ row.url }}"><strong>{{ row.name }}</strong></a>
+                            <i class="fa fa-envelope" aria-hidden="true" style="float:left">
+                                {%if row.grade == -1 %}<font font color="red">new homework!</font>{% endif %}
+                                {%if row.grade != -1 %}<font font color="blue">{{ row.grade }}</font>{% endif %}
+
+                            </i>
+                            <a href="homeworkDemo.html"><strong>{{ row.name }}</strong></a>
+
                         </div>
                     {% endfor %}
                     {% endif %}   
