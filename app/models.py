@@ -76,6 +76,7 @@ class Course(db.Model):
 class TakingClass(db.Model):
     __tablename__ = "takingClass"
 
+    taking_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     student_id = db.Column(db.String(32), db.ForeignKey("user.id"))
 
@@ -87,11 +88,12 @@ class TakingClass(db.Model):
 class Homework(db.Model):
     __tablename__ = "homework"
 
-    id = db.Column(db.String(32), primary=True)
+    id = db.Column(db.String(32), primary_key=True)
     name = db.Column(db.String(32))
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime)
+
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123'))
