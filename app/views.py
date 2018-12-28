@@ -41,7 +41,6 @@ def load_user(uid):
 
 @app.route('/index.html')
 def index():
-
     class Total:
         def __init__(self):
             self.name = 'This is name'
@@ -50,8 +49,9 @@ def index():
             self.time = 'teacher'
             self.imgURL = '../static/uploads/class2.jpg'
             self.courseDetail = 'courseDemo'
+
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
-    return render_template("index.html", Total = [Total()]*10)
+    return render_template("index.html", Total=[Total()] * 10)
 
 
 @app.route('/Tindex.html')
@@ -71,7 +71,8 @@ def courseDemo():
         def __init__(self):
             self.name = 'This is name'
             self.details = 'This id details balabala'
-    return render_template('courseDemo.html', courseInfo = CourseInfo())
+
+    return render_template('courseDemo.html', courseInfo=CourseInfo())
 
 
 @app.route('/forum.html')
@@ -82,8 +83,7 @@ def forum():
             self.id = 'This is id'
             self.details = 'This is details balabala'
 
-
-    return render_template('forum.html', Total = [Total()]*10)
+    return render_template('forum.html', Total=[Total()] * 10)
 
 
 @app.route('/homework.html')
@@ -92,7 +92,8 @@ def homework():
         def __init__(self):
             self.name = 'This is name'
             self.url = "homeworkDemo.html"
-    return render_template('homework.html', Total = [HomeworkInfo()]*10)
+
+    return render_template('homework.html', Total=[HomeworkInfo()] * 10)
 
 
 @app.route('/homeworkDemo.html')
@@ -101,7 +102,8 @@ def homeworkDemo():
         def __init__(self):
             self.name = 'This is name'
             self.details = "fdasfasdfasdfasdfasd"
-    return render_template('homeworkDemo.html', homework = HomeworkInfo())
+
+    return render_template('homeworkDemo.html', homework=HomeworkInfo())
 
 
 @app.route('/info.html')
@@ -110,7 +112,8 @@ def info():
         def __init__(self):
             self.name = 'This is name'
             self.details = "fdasfasdfasdfasdfasd"
-    return render_template('info.html',Total = [Info()]*10)
+
+    return render_template('info.html', Total=[Info()] * 10)
 
 
 @app.route('/media.html')
@@ -119,7 +122,8 @@ def media():
         def __init__(self):
             self.url = 'courseDemo'
             self.img = "../static/uploads/course_01.jpg"
-    return render_template('media.html',Total = [Info()]*10)
+
+    return render_template('media.html', Total=[Info()] * 10)
 
 
 @app.route('/signUp.html')
@@ -180,3 +184,11 @@ def login():
     if error is not None:
         flash(error, category='danger')
     return render_template('login.html', form=form, error=error)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()  # 登出用户
+    flash("Logout successful", category='success')
+    return redirect(url_for('index'))
