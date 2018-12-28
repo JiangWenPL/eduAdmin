@@ -8,6 +8,7 @@ import datetime
 # from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import and_
+from datetime import datetime
 
 
 # Base = declarative_base ()
@@ -72,17 +73,23 @@ class Course(db.Model):
         self.course_url = course_url
         self.time = time
 
+    def __repr__(self):
+        return '<Course %r>' % self.id
+
 
 class TakingClass(db.Model):
     __tablename__ = "takingClass"
 
-    taking_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     student_id = db.Column(db.String(32), db.ForeignKey("user.id"))
 
     def __init__(self, course_id, student_id):
         self.course_id = course_id
         self.student_id = student_id
+
+    def __repr__(self):
+        return '<TakingClass %r>' % self.id
 
 
 class Homework(db.Model):
@@ -100,6 +107,9 @@ class Homework(db.Model):
         self.description = description
         self.deadline = deadline
 
+    def __repr__(self):
+        return '<Homework %r>' % self.id
+
 
 class StudentHomework(db.Model):
     __tablename__ = "studentHomework"
@@ -116,6 +126,7 @@ class StudentHomework(db.Model):
         self.homework_url = homework_url
 
 
+# a post in bbs
 class Post(db.Model):
     __tablename__ = "post"
 
@@ -130,11 +141,14 @@ class Post(db.Model):
         self.course_id = course_id
         self.user_id = user_id
 
+    def __repr__(self):
+        return '<Post %r>' % self.id
+
 
 class Message(db.Model):  # A floor in a post
     __tablename__ = "message"
 
-    message_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     description = db.Column(db.String(256))
@@ -146,7 +160,14 @@ class Message(db.Model):  # A floor in a post
         self.description = description
         self.floor = floor
 
+    def __repr__(self):
+        return '<message %r>' % self.id
+
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123'))
-    db.session.add(Course('00001', 'Java', '210000', '', 'Friday'))
+    db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday'))
+    db.session.add(TakingClass('cs221', '316010'))
+    db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
+    db.session.add(Post('The homework is so hard!', '316010', 'cs221'))
+    db.session.add(Message('1', '316010', 'Can you help me?', 1))

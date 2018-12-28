@@ -5,7 +5,7 @@ from flask import render_template, flash, request, abort, redirect, url_for, g, 
 from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
-from app.models import test_init, User
+from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
 from app.forms import LoginForm, SignUpForm
 from sqlalchemy.sql import and_
 from sqlalchemy import func
@@ -22,6 +22,13 @@ def init_view():
     db.create_all()  # Do not recreate mysql database.
     test_init()
     db.session.commit()
+
+    print(User.query.all())
+    print(Course.query.all())
+    print(Homework.query.all())
+    print(TakingClass.query.all())
+    print(Post.query.all())
+    print(Message.query.all())
 
     # Add login guider
     lm.login_view = url_for('login')
