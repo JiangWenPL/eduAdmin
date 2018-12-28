@@ -88,7 +88,7 @@ class TakingClass(db.Model):
 class Homework(db.Model):
     __tablename__ = "homework"
 
-    id = db.Column(db.String(32), primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(32))
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     description = db.Column(db.String(256))
@@ -104,8 +104,8 @@ class Homework(db.Model):
 class StudentHomework(db.Model):
     __tablename__ = "studentHomework"
 
-    id = db.Column(db.String(32), primary_key=True, autoincrement=True)
-    homework_id = db.Column(db.String(32), db.ForeignKey("homework.id"))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    homework_id = db.Column(db.Integer, db.ForeignKey("homework.id"))
     student_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     homework_url = db.Column(db.String(128))
     grade = db.Column(db.Integer, default=-1)  # grade == -1 means that the homework hasn't been marked
@@ -119,7 +119,7 @@ class StudentHomework(db.Model):
 class Post(db.Model):
     __tablename__ = "post"
 
-    post_id = db.Column(db.String(32), primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     post_topic = db.Column(db.String(32))
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     # a course is corresponding to a module
@@ -134,8 +134,8 @@ class Post(db.Model):
 class Message(db.Model):  # A floor in a post
     __tablename__ = "message"
 
-    message_id = db.Column(db.String(32), primary_key=True, autoincrement=True)
-    post_id = db.Column(db.String(32), db.ForeignKey("post.id"))
+    message_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     description = db.Column(db.String(256))
     floor = db.Column(db.Integer)
