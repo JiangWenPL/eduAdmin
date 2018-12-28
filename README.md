@@ -14,7 +14,11 @@ For any problem about this project, please contact: WenJiang@zju.edu.cn
 
   ```bash
   conda env create -f environments.yml
-  conda activate misc`
+  conda activate misc
   ```
-
-- 
+  You are all set!
+  
+## Run:
+```bash
+python run.py
+```
