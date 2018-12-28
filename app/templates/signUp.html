@@ -163,6 +163,23 @@
                     </form>
                 </div>
             </div>
+            <script>
+          function validate() {
+              var pwd1 = document.getElementById("pwd1").value;
+              var pwd2 = document.getElementById("pwd2").value;
+        <!-- 对比两次输入的密码 -->
+              if(pwd1 != pwd2) {
+                  alert("passwords are different!");
+                  document.getElementById("submit").disabled = true;
+              }
+              else {
+                document.getElementById("submit").disabled = false;
+              }
+          }
+
+            </script>
+
+
             <div class="col-md-6 col-sm-6">
                 <div class="big-tagline clearfix">
                     <h2>Wlecome to</h2>

@@ -3,13 +3,13 @@
 
     <!-- Basic -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+ 
      <!-- Site Metas -->
-    <title>主页</title>
+    <title>论坛</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -62,29 +62,27 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="active" href="index.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="info.html">Information</a></li>
-                        <li><a href="homework.html">Homework</a></li>
+                        <li><a href="homework.html">homework</a></li>
                         <li><a href="media.html">Media</a></li>
-                        <li><a href="forum.html">Forum</a></li>
+                        <li><a class="active" href="forum.html">Forum</a></li>
                         <li><a href="contact.html">Contact</a></li>
-
-						<li class="search-option">
-							<button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true"></i></button>
-							<form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
-								<input type="text" placeholder="Search....">
-								<button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
-							</form>
-					   </li>
+                        <li class="search-option">
+                            <button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
+                                <input type="text" placeholder="Search....">
+                                <button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                       </li> 
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
-
-	   <div class="all-title-box">
-           <div class="container">
+    
+    <div class="all-title-box">
+        <div class="container">
                {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         <ul class=flashes>
@@ -101,84 +99,73 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Course</h2>
+                    <h2>Forum</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li>List</li>
+                            <li>Forum</li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
+    
 
-    <div id="features" class="section wb">
-    <div class="container">
-        <div class="section-title row text-center">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>Your Course</h3>
-                <p class="lead">following are the class you attended.</p>
-            </div><!-- end col -->
-        </div><!-- end title -->
 
-        <hr class="invis">
+                    <div class="contact_form">
+                        <form id="contactform1" class="row" name="contactform" method="post">
+                            <fieldset class="row-fluid">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label class="sr-only">Which course?</label>
+                                    <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
+                                        <option value="OS">OS</option>
+                                        <option value="Java">Java</option>
+                                        <option value="SRE">SRE</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <button  type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block" >Go</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
 
-        <div class="row">
 
+        <div class="testimonial clearfix">
+            <p><textarea name="content" class="form-control" rows="6"></textarea></p>
+            <button  type="button"  class="btn btn-light btn-radius grd1 btn-brd" >Submit</button>
+        </div>
+
+
+
+
+    <div id="testimonials" class="section lb">
+        <div class="container">
                     {% if Total %}
                     {%for row in Total%}
-
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="service-widget">
-                    <div class="property-main">
-                        <div class="property-wrap">
-                            <figure class="post-media wow fadeIn">
-                                <a href="{{ row.courseDetail }}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                                <img src="{{ row.imgURL }}" alt="" class="img-responsive">
-                                <div class="label-inner">
-
-                                </div>
-                            </figure>
-                            <div class="item-body">
-                                <h3>{{ row.name }}</h3>
-
-                                <div class="adderess">
-                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                    {{ row.location }}
-                                </div>
+                        <div class="testimonial clearfix">
+                            <div class="testi-meta">
+                                <h4>{{ row.name }}<small>- {{ row.id }}</small></h4>
                             </div>
-                            <div class="item-foot">
-                                <div class="pull-left">
-                                    <span class="prop-user-agent">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        {{ row.teacher }}
-                                    </span>
-                                </div>
-                                <div class="pull-right">
-                                    <span class="prop-date">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        {{ row.time }}
-                                    </span>
-                                </div>
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> {{ row.details }} <i class="fa fa-quote-right"></i></h3>
                             </div>
+                            <button class="btn btn-light btn-radius grd1 btn-brd" id="row.ID" type="submit">delete</button>
                         </div>
-                    </div>
-                </div><!-- end service -->
-            </div>
-
                     {% endfor %}
-                    {% endif %}
+                    {% endif %}    
+                        
+                        
 
+                        
 
-        </div><!-- end row -->
-    </div><!-- end container -->
-    <div class="container text-center">
-        <button  type="button"  class="btn btn-light btn-radius grd1 btn-brd" >logout</button>
-    </div>
-</div><!-- end section -->
-
+                    </div><!-- end carousel -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
 
 
     <footer class="footer">
@@ -209,7 +196,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-
+                
                 <div class="col-md-3 col-sm-3 col-xs-12">
                     <div class="widget clearfix">
                         <div class="widget-title">
@@ -223,7 +210,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-
+                
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="widget clearfix">
                         <div class="widget-title">
@@ -236,7 +223,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-
+                
             </div><!-- end row -->
         </div><!-- end container -->
     </footer><!-- end footer -->
@@ -248,7 +235,7 @@
                     <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="../static/#">software requirement class G02</a></p>
                 </div>
 
-
+                
             </div>
         </div><!-- end container -->
     </div><!-- end copyrights -->
