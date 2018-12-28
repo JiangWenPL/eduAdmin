@@ -21,7 +21,8 @@ class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.String(32), primary_key=True)
     password_hash = db.Column(db.String(32))
-    user_type = db.Column(db.String(32), default="guest")
+    user_type = db.Column(db.String(32))
+    email = db.Column(db.String(32))
 
     def is_authenticated(self):
         return True
@@ -35,10 +36,12 @@ class User(db.Model):
     def get_id(self):
         return self.id
 
-    def __init__(self, id, name, password, is_root=False):
+    def __init__(self, id, name, password, email, user_type, is_root=False):
         self.id = id
         self.name = name
         self.password = password
+        self.email = email
+        self.user_type = user_type
         self.is_root = is_root
 
     @property
@@ -165,7 +168,7 @@ class Message(db.Model):  # A floor in a post
 
 
 def test_init():
-    db.session.add(User('316010', 'Alice', '123'))
+    db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
     db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))

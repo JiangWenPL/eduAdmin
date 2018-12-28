@@ -139,10 +139,22 @@ def media():
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
     form = SignUpForm()
+    print("aaaaa")
     if form.validate_on_submit():
-        print(form.user.data)
-        print(form.password.data)
-        print(form.email.data)
+        print("OK!!")
+        try:
+            user = User.query.filter_by(id=form.user.data).first()
+            if not user is None:
+                error = 'User has registered!'
+                return render_template('signUp.html')
+            else:
+                db.session.add(
+                    User(form.user.data, form.name.data, form.password.data, form.email.data, form.userType.data))
+                db.session.commit()
+        except Exception as e:
+            flash(e, 'danger')
+
+        print(User.query.all())
     return render_template('signUp.html', form=form)
 
 
@@ -179,7 +191,6 @@ def login():
         flash("You have logged in to system")
         return redirect(url_for('index'))
     form = LoginForm()
-
     if form.validate_on_submit():
         try:
             user = User.query.filter_by(id=form.username.data).first()
