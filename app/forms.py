@@ -16,3 +16,9 @@ class LoginForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     remember = BooleanField("remember", validators=[Optional()], default=False)
+
+
+class SignUpForm(FlaskForm):
+    user = StringField("user", validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
+    email = StringField("email", validators=[DataRequired()])

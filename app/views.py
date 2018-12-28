@@ -6,7 +6,7 @@ from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
 from app.models import test_init, User
-from app.forms import LoginForm
+from app.forms import LoginForm, SignUpForm
 from sqlalchemy.sql import and_
 from sqlalchemy import func
 import json
@@ -42,6 +42,7 @@ def load_user(uid):
 @app.route('/index.html')
 def index():
     flash('Hello, test flash', 'success')
+
     class Total:
         def __init__(self):
             self.name = 'This is name'
@@ -127,9 +128,14 @@ def media():
     return render_template('media.html', Total=[Info()] * 10)
 
 
-@app.route('/signUp.html')
+@app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
-    return render_template('signUp.html')
+    form = SignUpForm()
+    if form.validate_on_submit():
+        print(form.user.data)
+        print(form.password.data)
+        print(form.email.data)
+    return render_template('signUp.html', form=form)
 
 
 @app.route('/TcourseDemo.html')
@@ -152,9 +158,9 @@ def Tmedia():
     return render_template('Tmedia.html')
 
 
-@app.route('/signUp.html')
-def signUpp():
-    return render_template('signUp.html')
+# @app.route('/signUpp.html')
+# def signUpp():
+#     return render_template('signUp.html')
 
 
 @app.route('/', methods=['GET', 'POST'])

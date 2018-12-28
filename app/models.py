@@ -149,3 +149,4 @@ class Message(db.Model):  # A floor in a post
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123'))
+    db.session.add(Course('00001', 'Java', '210000', '', 'Friday'))

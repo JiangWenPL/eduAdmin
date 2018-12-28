@@ -118,7 +118,8 @@
                 <div class="col-md-6 wow slideInLeft">
                     <div class="contact_form">
                         <h3><i class="fa fa-envelope-o grd1 global-radius"></i>Register</h3>
-                        <form id="contactform1" class="row" name="contactform" method="post">
+                        <form id="contactform1" class="row" name="contactform" method="post" action="{{ url_for('signUp') }}">
+                            {{form.hidden_tag()}}
                             <fieldset class="row-fluid">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="text" name="user" id="user" class="form-control" placeholder="User ID">
@@ -133,7 +134,7 @@
                                     <input type="email" name="email" placeholder="Email Address" required="" class="form-control">
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                    <button  type="button"  class="btn btn-light btn-radius btn-brd grd1 btn-block" >Register</button>
+                                    <button  type="submit"  class="btn btn-light btn-radius btn-brd grd1 btn-block" >Register</button>
                             </fieldset>
                         </form>
                     </div>
