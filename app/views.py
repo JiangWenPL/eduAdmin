@@ -41,6 +41,7 @@ def load_user(uid):
 
 @app.route('/index.html')
 def index():
+    flash('Hello, test flash', 'success')
     class Total:
         def __init__(self):
             self.name = 'This is name'

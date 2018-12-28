@@ -3,13 +3,13 @@
 
     <!-- Basic -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
- 
+
      <!-- Site Metas -->
-    <title>主页</title>  
+    <title>主页</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -75,15 +75,29 @@
 								<input type="text" placeholder="Search....">
 								<button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</form>
-					   </li> 
+					   </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-	
+
 	   <div class="all-title-box">
+           <div class="container">
+               {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class=flashes>
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+           </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -99,7 +113,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="features" class="section wb">
     <div class="container">
         <div class="section-title row text-center">
@@ -108,8 +122,8 @@
                 <p class="lead">following are the class you attended.</p>
             </div><!-- end col -->
         </div><!-- end title -->
-            
-        <hr class="invis"> 
+
+        <hr class="invis">
 
         <div class="row">
 
@@ -124,7 +138,7 @@
                                 <a href="{{ row.courseDetail }}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
                                 <img src="{{ row.imgURL }}" alt="" class="img-responsive">
                                 <div class="label-inner">
-                                  
+
                                 </div>
                             </figure>
                             <div class="item-body">
@@ -155,7 +169,7 @@
             </div>
 
                     {% endfor %}
-                    {% endif %} 
+                    {% endif %}
 
 
 
@@ -193,7 +207,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-                
+
                 <div class="col-md-3 col-sm-3 col-xs-12">
                     <div class="widget clearfix">
                         <div class="widget-title">
@@ -207,7 +221,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-                
+
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="widget clearfix">
                         <div class="widget-title">
@@ -220,7 +234,7 @@
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
-                
+
             </div><!-- end row -->
         </div><!-- end container -->
     </footer><!-- end footer -->
@@ -232,7 +246,7 @@
                     <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="../static/#">software requirement class G02</a></p>
                 </div>
 
-                
+
             </div>
         </div><!-- end container -->
     </div><!-- end copyrights -->
@@ -244,7 +258,7 @@
     <!-- ALL PLUGINS -->
     <script src="../static/js/custom.js"></script>
     <script src="../static/js/portfolio.js"></script>
-    <script src="../static/js/hoverdir.js"></script>    
+    <script src="../static/js/hoverdir.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
    <!-- MAP & CONTACT -->
     <script src="../static/js/map.js"></script>
