@@ -68,13 +68,15 @@ class Course(db.Model):
     teacher_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     course_url = db.Column(db.String(128))  # preview picture
     time = db.Column(db.String(32))
+    description = db.Column(db.String(256))
 
-    def __init__(self, id, name, teacher_id, course_url, time):
+    def __init__(self, id, name, teacher_id, course_url, time, description):
         self.id = id
         self.name = name
         self.teacher_id = teacher_id
         self.course_url = course_url
         self.time = time
+        self.description = description
 
     def __repr__(self):
         return '<Course %r>' % self.id
@@ -169,7 +171,7 @@ class Message(db.Model):  # A floor in a post
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
-    db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday'))
+    db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))

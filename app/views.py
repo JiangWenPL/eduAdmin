@@ -49,18 +49,28 @@ def load_user(uid):
 @app.route('/index.html')
 def index():
     flash('Hello, test flash', 'success')
+    # print(g.user.email)
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+
+    for taking in takings:
+        courses = Course.query.filter_by(id=taking.course_id).all()
 
     class Total:
-        def __init__(self):
-            self.name = 'This is name'
-            self.location = "location"
-            self.teacher = 'teacher'
-            self.time = 'teacher'
-            self.imgURL = '../static/uploads/class2.jpg'
-            self.courseDetail = 'courseDemo'
+        def __init__(self, name, teacher, time, imgUPL, courseDetail):
+            self.name = name
+            # self.location = "location"
+            self.teacher = teacher
+            self.time = time
+            self.imgURL = imgUPL
+            self.courseDetail = courseDetail
 
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
-    return render_template("index.html", Total=[Total()] * 10)
+
+    total = []
+    for course in courses:
+        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description)
+        total.append(onecourse)
+    return render_template("index.html", Total=total)
 
 
 @app.route('/Tindex.html')
@@ -200,7 +210,11 @@ def login():
                 error = 'Invalid password'
             else:
                 login_user(user=user, remember=form.remember.data)
-                return redirect(url_for('index'))
+                print(user.user_type)
+                if user.user_type == 'student':
+                    return redirect(url_for('index'))
+                else:
+                    return redirect(url_for("Tindex"))
         except Exception as e:
             # flash ( 'login fail', 'primary' )
             flash(e, 'danger')
