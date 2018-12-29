@@ -6,7 +6,7 @@ from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
 from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
-from app.forms import LoginForm, SignUpForm
+from app.forms import LoginForm, SignUpForm, AddCourseForm
 from sqlalchemy.sql import and_
 from sqlalchemy import func
 import json
@@ -75,8 +75,9 @@ def index():
 
 @app.route('/Tindex.html')
 def Tindex():
+    form = AddCourseForm()
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
-    return render_template("Tindex.html")
+    return render_template("Tindex.html", Total=[], form=form)
 
 
 @app.route('/contact.html')
@@ -197,9 +198,9 @@ def Tmedia():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
-    if g.user is not None and g.user.is_authenticated:
-        flash("You have logged in to system")
-        return redirect(url_for('index'))
+    # if g.user is not None and g.user.is_authenticated:
+    #     flash("You have logged in to system")
+    #     return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         try:

@@ -171,6 +171,7 @@ class Message(db.Model):  # A floor in a post
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
+    db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))
     db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
