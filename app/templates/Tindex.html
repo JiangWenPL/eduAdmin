@@ -143,10 +143,6 @@
                             <div class="item-body">
                                 <h3>{{ row.name }}</h3>
 
-                                <div class="adderess">
-                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                    {{ row.location }}
-                                </div>
                             </div>
                             <div class="item-foot">
                                 <div class="pull-left">
@@ -172,6 +168,62 @@
 
         </div><!-- end row -->
     </div><!-- end container -->
+        <div class="container text-center">
+        <button  type="button"  class="btn btn-light btn-radius grd1 btn-brd" >logout</button>
+    </div>
+
+
+    <div class="container">
+                    <form class="row" action="" method="post">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="row-fluid">
+                            <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <input type="text" id="coursename" class="form-control"
+                                       placeholder="course name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <input type="text"  id="description" class="form-control"
+                                       placeholder="description">
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <input type="text" id="dourseID" class="form-control"
+                                       placeholder="course id">
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <input type="text" id="time" class="form-control"
+                                       placeholder="time">
+                        </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <input type="file" id="upload" name="upload" />
+                        </div>
+
+                        <div class="form-inline">add picture</div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">add course
+                                </button>
+                            </div>
+                        </div>
+
+                        </fieldset>
+                    </form>
+    </div>
+
+
 </div><!-- end section -->
 
 
