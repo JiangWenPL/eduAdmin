@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
 from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
 from app.forms import LoginForm, SignUpForm, AddCourseForm
+from flask_uploads import *
 from sqlalchemy.sql import and_
 from sqlalchemy import func
 import json
@@ -46,23 +47,34 @@ def load_user(uid):
     return User.query.get(uid)
 
 
+class Total:
+    def __init__(self, name, teacher, time, imgUPL, courseDetail):
+        self.name = name
+        self.teacher = teacher
+        self.time = time
+        self.imgURL = imgUPL
+        self.courseDetail = courseDetail
+
+
 @app.route('/index.html')
 def index():
     flash('Hello, test flash', 'success')
     # print(g.user.email)
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
 
+    courses = []
     for taking in takings:
-        courses = Course.query.filter_by(id=taking.course_id).all()
+        course = Course.query.filter_by(id=taking.course_id).first()
+        courses.append(course)
 
-    class Total:
-        def __init__(self, name, teacher, time, imgUPL, courseDetail):
-            self.name = name
-            # self.location = "location"
-            self.teacher = teacher
-            self.time = time
-            self.imgURL = imgUPL
-            self.courseDetail = courseDetail
+    # class Total:
+    #     def __init__(self, name, teacher, time, imgUPL, courseDetail):
+    #         self.name = name
+    #         # self.location = "location"
+    #         self.teacher = teacher
+    #         self.time = time
+    #         self.imgURL = imgUPL
+    #         self.courseDetail = courseDetail
 
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
 
@@ -73,11 +85,40 @@ def index():
     return render_template("index.html", Total=total)
 
 
-@app.route('/Tindex.html')
+@app.route('/Tindex.html', methods=['GET', 'POST'])
 def Tindex():
     form = AddCourseForm()
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
-    return render_template("Tindex.html", Total=[], form=form)
+    flash('Hello, test flash', 'success')
+    courses = Course.query.filter_by(teacher_id=g.user.id).all()
+    total = []
+    for course in courses:
+        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description)
+        total.append(onecourse)
+
+    if form.validate_on_submit():
+        print("a")
+        try:
+            # print("b")
+            course = Course.query.filter_by(id=form.courseID.data).first()
+            if not course is None:
+                error = 'Course has registered!'
+                return render_template('Tindex.html')
+            else:
+                filename = form.picture.data.filename
+                print(filename)
+                # 将上传的文件保存到服务器;
+                form.picture.data.save(filename)
+                db.session.add(
+                    Course(form.courseID.data, form.coursename.data, g.user.id, filename, form.time.data,
+                           form.description.data))
+                db.session.commit()
+                print(Course.query.all())
+                flash('The course is added successfully!')
+                return redirect(url_for('Tindex'))
+        except Exception as e:
+            flash(e, 'danger')
+    return render_template("Tindex.html", Total=total, form=form)
 
 
 @app.route('/contact.html')
@@ -150,9 +191,9 @@ def media():
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
     form = SignUpForm()
-    print("aaaaa")
+    # print("aaaaa")
     if form.validate_on_submit():
-        print("OK!!")
+        # print("OK!!")
         try:
             user = User.query.filter_by(id=form.user.data).first()
             if not user is None:

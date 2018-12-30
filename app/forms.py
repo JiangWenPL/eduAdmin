@@ -1,9 +1,11 @@
 # 引入Form基类
 from flask_wtf import FlaskForm
 # 引入Form元素父类
-from wtforms import StringField, PasswordField, BooleanField, IntegerField, FloatField, SelectField, DecimalField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, FloatField, SelectField, DecimalField, \
+    SubmitField
 # 引入Form验证父类
 from wtforms.validators import DataRequired, Length, NumberRange, Optional
+from flask_wtf.file import FileField, FileRequired
 
 # from flask_wtf.file import FileAllowed, FileRequired, FileField
 # from app import csv_set
@@ -28,4 +30,8 @@ class SignUpForm(FlaskForm):
 
 class AddCourseForm(FlaskForm):
     coursename = StringField("coursename", validators=[DataRequired()])
-    courseid = StringField("courseid", validators=[DataRequired()])
+    description = StringField("description", validators=[DataRequired()])
+    courseID = StringField("courseID", validators=[DataRequired()])
+    time = StringField("time", validators=[DataRequired()])
+    picture = FileField('picture', validators=[FileRequired()])
+    submit = SubmitField('submit')
