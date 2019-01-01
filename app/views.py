@@ -57,8 +57,12 @@ class Total:
 
 
 @app.route('/index.html')
+@login_required
 def index():
     flash('Hello, test flash', 'success')
+    user_type2index = {'teacher': 'Tindex.html', 'student': 'index.html'}
+    if g.user.user_type != 'student':
+        redirect(user_type2index[g.user.user_type])
     # print(g.user.email)
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
 
@@ -86,6 +90,7 @@ def index():
 
 
 @app.route('/Tindex.html', methods=['GET', 'POST'])
+@login_required
 def Tindex():
     form = AddCourseForm()
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
@@ -122,11 +127,13 @@ def Tindex():
 
 
 @app.route('/contact.html')
+@login_required
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html', form=LoginForm())  # Temporary to make it run
 
 
 @app.route('/courseDemo.html')
+@login_required
 def courseDemo():
     class CourseInfo:
         def __init__(self):
@@ -137,6 +144,7 @@ def courseDemo():
 
 
 @app.route('/forum.html')
+@login_required
 def forum():
     class Total:
         def __init__(self):
@@ -148,6 +156,7 @@ def forum():
 
 
 @app.route('/homework.html')
+@login_required
 def homework():
     class HomeworkInfo:
         def __init__(self):
@@ -159,6 +168,7 @@ def homework():
 
 
 @app.route('/homeworkDemo.html')
+@login_required
 def homeworkDemo():
     class HomeworkInfo:
         def __init__(self):
@@ -169,6 +179,7 @@ def homeworkDemo():
 
 
 @app.route('/info.html')
+@login_required
 def info():
     class Info:
         def __init__(self):
@@ -179,6 +190,7 @@ def info():
 
 
 @app.route('/media.html')
+@login_required
 def media():
     class Info:
         def __init__(self):
@@ -189,6 +201,7 @@ def media():
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
+@login_required
 def signUp():
     form = SignUpForm()
     # print("aaaaa")
@@ -211,21 +224,25 @@ def signUp():
 
 
 @app.route('/TcourseDemo.html')
+@login_required
 def TcourseDemo():
     return render_template('TcourseDemo.html')
 
 
 @app.route('/Thomework.html')
+@login_required
 def Thomework():
     return render_template('Thomework.html')
 
 
 @app.route('/Tinfo.html')
+@login_required
 def Tinfo():
     return render_template('Tinfo.html')
 
 
 @app.route('/Tmedia.html')
+@login_required
 def Tmedia():
     return render_template('Tmedia.html')
 
