@@ -1,109 +1,334 @@
-{% set current_page='登陆' %}
-{% extends 'base.html' %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
 
-    <ul class='slideshow'>
-        <li>
-            <span>Summer</span>
-        </li>
-        <li>
-            <span>Fall</span>
-        </li>
-        <li>
-            <span>Winter</span>
-        </li>
-        <li>
-            <span>Spring</span>
-        </li>
-    </ul>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <div class="parallax first-section">
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- Site Metas -->
+<title>登录</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Site Icons -->
+<link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="../static/images/apple-touch-icon.png">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="../static/style.css">
+<!-- Colors CSS -->
+<link rel="stylesheet" href="../static/css/colors.css">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" href="../static/css/versions.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="../static/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="../static/css/custom.css">
+
+<!-- Modernizer for Portfolio -->
+<script src="../static/js/modernizer.js"></script>
+
+<!--[if lt IE 9]>
+      <script src="../static/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="../static/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- Site Metas -->
+<title>登录</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Site Icons -->
+<link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="../static/images/apple-touch-icon.png">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="../static/style.css">
+<!-- Colors CSS -->
+<link rel="stylesheet" href="../static/css/colors.css">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" href="../static/css/versions.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="../static/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="../static/css/custom.css">
+
+<!-- Modernizer for Portfolio -->
+<script src="../static/js/modernizer.js"></script>
+
+<!--[if lt IE 9]>
+      <script src="../static/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="../static/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="realestate_version">
+
+<!-- LOADER -->
+<div id="preloader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div><!-- end loader -->
+<!-- END LOADER -->
+    <div class="container">
+               {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class=flashes>
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+           </div>
+<header class="header header_style_01">
+    <nav class="megamenu navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="../static/images/logos/logo.png" alt="image"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="info.html">Information</a></li>
+                    <li><a href="homework.html">Homework</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+
+                    <li class="search-option">
+                        <button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"
+                                                                              aria-hidden="true"></i></button>
+                        <form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
+                            <input type="text" placeholder="Search....">
+                            <button class="p-color-bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<ul class='slideshow'>
+    <li>
+        <span>Summer</span>
+    </li>
+    <li>
+        <span>Fall</span>
+    </li>
+    <li>
+        <span>Winter</span>
+    </li>
+    <li>
+        <span>Spring</span>
+    </li>
+</ul>
+
+<div class="parallax first-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 wow slideInLeft">
+                <div class="contact_form">
+                    <h3><i class="fa fa-envelope-o grd1 global-radius"></i>login</h3>
+                    <form class="row" action="{{ url_for('login') }}" method="post">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="row-fluid">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" name="username" id="username" class="form-control"
+                                       placeholder="User ID">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="password" name="password" id="password" placeholder="Password"
+                                       required="" class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <input type="text" name="Verification" placeholder="Verification Code" required=""
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <img src="../static/uploads/checkCode.png">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <input type="checkbox" class="btn btn-light btn-radius btn-brd grd1 btn-block"><label class='form-check-label' for=0>remember me</label>
+                                </input>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">login
+                                </button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="big-tagline clearfix">
+                    <h2>Wlecome to</h2>
+                    <h2>ZJU online Class</h2>
+                    <p class="lead">This Web is for the learning of some courses in ZJU. Please use your student ID to
+                        enroll.</p>
+                    <a data-scroll class="btn btn-light btn-radius grd1 btn-brd">I'm guest</a>
+                    <a data-scroll class="btn btn-light btn-radius grd1 btn-brd" href="signUp.html">sign up</a>
+                </div>
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+
+<div class="about-box">
+    <div class="container">
+        <div class="row">
+            <div class="top-feature owl-carousel owl-theme">
+                <div class="item">
+                    <div class="single-feature">
+                        <h4><a href="../static/#">efficient</a></h4>
+                        <p>teaching online</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="single-feature">
+                        <h4><a href="../static/#">convenient</a></h4>
+                        <p>study online</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="single-feature">
+                        <h4><a href="../static/#">light</a></h4>
+                        <p>Web online</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="single-feature">
+                        <h4><a href="../static/#">communication</a></h4>
+                        <p>communicate online</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hr1">
+
+
+        </div>
+    </div>
+
+
+    <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 wow slideInLeft">
-                    <div class="contact_form">
-                        <h3><i class="fa fa-envelope-o grd1 global-radius"></i>login</h3>
-                        <form class="row" action="{{ url_for('login') }}" method="post">
-                            {{ form.hidden_tag() }}
-                            <fieldset class="row-fluid">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" name="username" id="username" class="form-control"
-                                           placeholder="User ID">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="password" name="password" id="password" placeholder="Password"
-                                           required="" class="form-control">
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <input type="text" name="Verification" placeholder="Verification Code" required=""
-                                           class="form-control">
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <img src="../static/uploads/checkCode.png">
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <input type="checkbox"
-                                           class="btn btn-light btn-radius btn-brd grd1 btn-block"><label
-                                        class='form-check-label' for=0>remember me</label>
-                                    </input>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                    <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">login
-                                    </button>
-                                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <img src="../static/images/logos/logo-realestate.png" alt="">
+                        </div>
+                        <p> This course web is designed by G02</p>
+                        <p> Our leader is Jiangtan</p>
+                        <p> Our members are jw, lsc, pw, zxj, xm</p>
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
 
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="big-tagline clearfix">
-                        <h2>Wlecome to</h2>
-                        <h2>ZJU online Class</h2>
-                        <p class="lead">This Web is for the learning of some courses in ZJU. Please use your student ID
-                            to
-                            enroll.</p>
-                        <a data-scroll class="btn btn-light btn-radius grd1 btn-brd">I'm guest</a>
-                        <a data-scroll class="btn btn-light btn-radius grd1 btn-brd" href="signUp.html">sign up</a>
-                    </div>
-                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Info Link</h3>
+                        </div>
+
+                        <ul class="twitter-widget footer-links">
+                        <li><a href="https://www.cc98.org/"> CC98 </a></li>
+                        <li><a href="http://jwbinfosys.zju.edu.cn/"> ZJU教务管理系统 </a></li>
+                        <li><a href="http://bksy.zju.edu.cn/office/"> 本科生院官网</a></li>
+                        <li><a href="10.202.110.46:8080/jwglxt/xtgl/login_slogin.html"> ZJU选课系统</a></li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Contact Details</h3>
+                        </div>
+
+                        <ul class="footer-links">
+                            <li><a href="../static/#">lisicong97@gmail.com</a></li>
+                            <li>ZJU yuquan campus ***</li>
+                            <li>13800000000</li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Social</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="../static/#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                            <li><a href="../static/#"><i class="fa fa-github"></i> Github</a></li>
+                            <li><a href="../static/#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+
             </div><!-- end row -->
         </div><!-- end container -->
-    </div><!-- end section -->
+    </footer><!-- end footer -->
 
-    <div class="about-box">
+    <div class="copyrights">
         <div class="container">
-            <div class="row">
-                <div class="top-feature owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="single-feature">
-                            <h4><a href="../static/#">efficient</a></h4>
-                            <p>teaching online</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="single-feature">
-                            <h4><a href="../static/#">convenient</a></h4>
-                            <p>study online</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="single-feature">
-                            <h4><a href="../static/#">light</a></h4>
-                            <p>Web online</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="single-feature">
-                            <h4><a href="../static/#">communication</a></h4>
-                            <p>communicate online</p>
-                        </div>
-                    </div>
+            <div class="footer-distributed">
+                <div class="footer-right">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="../static/#">software
+                        requirement class G02</a></p>
                 </div>
-
-                <hr class="hr1">
 
 
             </div>
-        </div>
-{% endblock %}
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
+
+    <a href="../static/#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src="../static/js/all.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="../static/js/custom.js"></script>
+    <script src="../static/js/portfolio.js"></script>
+    <script src="../static/js/hoverdir.js"></script>
+    
+    <!-- MAP & CONTACT -->
+    <script src="../static/js/map.js"></script>
+
+</body>
+</html>

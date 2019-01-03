@@ -201,7 +201,6 @@ def media():
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
-@login_required
 def signUp():
     form = SignUpForm()
     # print("aaaaa")
@@ -254,6 +253,7 @@ def Tmedia():
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
     error = None
     # if g.user is not None and g.user.is_authenticated:
