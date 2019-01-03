@@ -287,7 +287,10 @@ def media():
 @app.route('/mediaDemo.html')
 @login_required
 def mediaDemo():
-    return render_template('mediaDemo.html')
+    class Info:
+        def __init__(self):
+            self.url = '../static/uploads/movie.ogg'
+    return render_template('mediaDemo.html',row = Info())
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])

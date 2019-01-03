@@ -15,15 +15,18 @@
 
             {% if Total %}
                 {% for row in Total %}
+                
                     <div class="post-media_g pitem item-w1 item-h1 cat1">
                     <a href="mediaDemo.html?name={{row.id}}">
                         <a href="mediaDemo.html?name={{row.id}}" data-rel="prettyPhoto[gal]">
-                            <img src="{{ row.img }}" alt="" class="img-responsive">
+                            <a href="mediaDemo.html?name={{row.id}}">
+                            <img src="{{ row.img }}" alt="" class="img-responsive"></a>
                             <div>
                                 <i class="flaticon-unlink"></i>
                             </div>
                         </a>
                     </a>
+                
                     </div>
                 {% endfor %}
             {% endif %}
