@@ -219,7 +219,6 @@ def forum_info():
     return render_template('forumInfo.html', Total=total, form=form)
 
 
-
 @app.route('/homework.html', methods=['GET', 'POST'])
 @login_required
 def homework():
@@ -267,12 +266,23 @@ def homework():
 @app.route('/homeworkDemo.html')
 @login_required
 def homeworkDemo():
-    class HomeworkInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = "fdasfasdfasdfasdfasd"
+    try:
+        homework_id = int(request.args.get('homework_id'))
+    except:
+        flash("Please specify homework_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
 
-    return render_template('homeworkDemo.html', homework=HomeworkInfo())
+    homework = Homework.query.filter_by(id=homework_id).first()
+
+    class HomeworkInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description))
 
 
 @app.route('/info.html')
