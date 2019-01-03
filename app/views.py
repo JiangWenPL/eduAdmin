@@ -182,6 +182,9 @@ def forum():
             course_id = Course.query.filter_by(teacher_id=g.user.get_id()).one().id
     posts = list()
     if course_id:
+        if request.method == 'POST' and form.validate_on_submit():
+            db.session.add(Post(form.title.data, g.user.get_id(), course_id, form.content.data))
+            db.session.commit()
         posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
             desc(Post.create_time)).limit(10).all()
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
@@ -205,7 +208,7 @@ def forum_info():
                 print(e)
     if not post_id:
         flash('Please select a post', 'error')
-        redirect(url_for(forum))
+        redirect(url_for('forum'))
     try:
         messages = db.session.query(User, Message).join(Message).filter(Message.post_id == int(post_id)).order_by(
             desc(Message.time)).all()

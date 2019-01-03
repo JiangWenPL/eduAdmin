@@ -51,4 +51,5 @@ class AddMessageForm(FlaskForm):
 
 
 class AddPostForm(FlaskForm):
-    topic = StringField("topic", validators=[DataRequired()])
+    title = StringField("title", validators=[DataRequired()])
+    content = StringField("content")

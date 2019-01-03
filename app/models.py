@@ -141,14 +141,16 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     post_topic = db.Column(db.String(32))
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
+    description = db.Column(db.String(256), default="")
     # a course is corresponding to a module
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     create_time = db.Column(db.DateTime, default=datetime.now())
 
-    def __init__(self, post_topic, user_id, course_id):
+    def __init__(self, post_topic, user_id, course_id, description=''):
         self.post_topic = post_topic
         self.course_id = course_id
         self.user_id = user_id
+        self.description = description
 
     def __repr__(self):
         return '<Post %r>' % self.id
