@@ -44,3 +44,7 @@ class AddStudentForm(FlaskForm):
 
 class HomeworkForm(FlaskForm):
     course_id = StringField("course_id", validators=[DataRequired()])
+
+
+class AddMessageForm(FlaskForm):
+    content = StringField("content", validators=[DataRequired()])

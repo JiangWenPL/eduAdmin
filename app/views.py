@@ -165,7 +165,7 @@ def courseDemo():
     return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
-@app.route('/forum.html')
+@app.route('/forum.html', methods=['GET', 'POST'])
 @login_required
 def forum():
     # class Total:
@@ -188,10 +188,21 @@ def forum():
     return render_template('forum.html', Total=total, Courses=Course.query.all())
 
 
-@app.route('/forumInfo.html')
+@app.route('/forumInfo.html', methods=['GET', 'POST'])
 @login_required
 def forum_info():
     post_id = request.args.get('post_id', None)
+    form = AddMessageForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        try:
+            floor_cnt = Message.query.filter_by(post_id=post_id).count()
+            db.session.add(
+                Message(post_id=post_id, user_id=g.user.get_id(), description=form.content.data, floor=floor_cnt + 1))
+            db.session.commit()
+        except Exception as e:
+            if DEBUGGING:
+                flash(e)
+                print(e)
     if not post_id:
         flash('Please select a post', 'error')
         redirect(url_for(forum))
