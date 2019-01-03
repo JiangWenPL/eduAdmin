@@ -20,6 +20,7 @@ from datetime import datetime
 class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.String(32), primary_key=True)
+    name = db.Column(db.String(32))
     password_hash = db.Column(db.String(32))
     user_type = db.Column(db.String(32))
     email = db.Column(db.String(32))
