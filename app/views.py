@@ -10,7 +10,8 @@ from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
-from sqlalchemy import func
+from sqlalchemy import func, desc
+from easydict import EasyDict
 import json
 import requests
 
@@ -186,10 +187,6 @@ def forum():
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
     return render_template('forum.html', Total=total, Courses=Course.query.all())
 
-@app.route('/forumInfo.html')
-@login_required
-def forumInfo():
-    return render_template('forumInfo.html')
 
 @app.route('/forumInfo.html')
 @login_required
@@ -280,6 +277,7 @@ def media():
 @login_required
 def mediaDemo():
     return render_template('mediaDemo.html')
+
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
