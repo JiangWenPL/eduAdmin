@@ -1,0 +1,35 @@
+{% set current_page='Forum' %}
+{% extends 'base.html' %}
+{% block body %}
+
+
+
+    <div class="testimonial clearfix">
+        <p><textarea name="content" class="form-control" rows="6"></textarea></p>
+        <button type="button" class="btn btn-light btn-radius grd1 btn-brd">Submit</button>
+    </div>
+
+
+
+
+    <div id="testimonials" class="section lb">
+        <div class="container">
+            {% if Total %}
+                {% for row in Total %}
+                    <div class="testimonial clearfix">
+                        <div class="testi-meta">
+                            <h2>{{ row.num }}</h2>
+                            <h4>{{ row.name }}
+                                <small>- {{ row.id }}</small>
+                            </h4>
+                        </div>
+                        <div class="desc">
+                            <h3><i class="fa fa-quote-left"></i> {{ row.details }} <i class="fa fa-quote-right"></i>
+                            </h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div><!-- end container -->
+    </div><!-- end section -->
+{% endblock %}

@@ -22,12 +22,6 @@
     </div>
 
 
-    <div class="testimonial clearfix">
-        <p><textarea name="content" class="form-control" rows="6"></textarea></p>
-        <button type="button" class="btn btn-light btn-radius grd1 btn-brd">Submit</button>
-    </div>
-
-
 
 
     <div id="testimonials" class="section lb">
@@ -41,8 +35,9 @@
                             </h4>
                         </div>
                         <div class="desc">
-                            <h3><i class="fa fa-quote-left"></i> {{ row.details }} <i class="fa fa-quote-right"></i>
-                            </h3>
+                            <a href="forumInfo.html">
+                            <h3>{{ row.details }}</h3>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
