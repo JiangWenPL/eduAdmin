@@ -10,10 +10,9 @@ from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
-from sqlalchemy import func, desc
+from sqlalchemy import func
 import json
 import requests
-from easydict import EasyDict
 
 Bootstrap(app)
 
@@ -187,6 +186,10 @@ def forum():
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
     return render_template('forum.html', Total=total, Courses=Course.query.all())
 
+@app.route('/forumInfo.html')
+@login_required
+def forumInfo():
+    return render_template('forumInfo.html')
 
 @app.route('/forumInfo.html')
 @login_required
@@ -211,11 +214,31 @@ def forum_info():
 @app.route('/homework.html')
 @login_required
 def homework():
+    form = HomeworkForm()
+
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
     class HomeworkInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.url = "homeworkDemo.html"
-            self.grade = 99
+        def __init__(self, name, grade):
+            self.name = name
+            # self.url = "homeworkDemo.html"
+            self.grade = grade
+
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+
+    courses = []
+    for taking in takings:
+        course = Course.query.filter_by(id=taking.course_id).first()
+        print(course.name)
+        courses = courses.append(course)
+
+    total0 = []
+    # for course in courses:
+    #     onecourse = CourseInfo(course.name, course.id)
+    #     total0.append(onecourse)
 
     return render_template('homework.html', Total=[HomeworkInfo()] * 10)
 
@@ -252,6 +275,11 @@ def media():
 
     return render_template('media.html', Total=[Info()] * 10)
 
+
+@app.route('/mediaDemo.html')
+@login_required
+def mediaDemo():
+    return render_template('mediaDemo.html')
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
