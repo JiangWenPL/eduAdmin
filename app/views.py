@@ -192,8 +192,6 @@ def forum():
 @login_required
 def forum_info():
     post_id = request.args.get('post_id', None)
-    import ipdb
-    ipdb.set_trace()
     form = AddMessageForm()
     if request.method == 'POST' and form.validate_on_submit():
         try:
