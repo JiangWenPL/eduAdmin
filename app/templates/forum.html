@@ -9,26 +9,25 @@
     </div>
 
         <div class="container">
-            <form class="row" action="" enctype="multipart/form-data" method="post">
-                
+            <form class="row" style="align:center" enctype="multipart/form-data" method="post">
+                {{form.hidden_tag()}}
                 <fieldset class="row-fluid">
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="text" id="title" name="title" class="form-control"
                                    placeholder="title">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <input type="details" id="details" name="details" class="form-control"
-                                   placeholder="details">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <p><textarea name="content" class="form-control" placeholder="details" rows="6"></textarea></p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <button type="submit" name="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">
                                 add new post
                             </button>
