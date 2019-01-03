@@ -192,6 +192,8 @@ def forum():
 @login_required
 def forum_info():
     post_id = request.args.get('post_id', None)
+    import ipdb
+    ipdb.set_trace()
     form = AddMessageForm()
     if request.method == 'POST' and form.validate_on_submit():
         try:
@@ -216,7 +218,7 @@ def forum_info():
         return redirect(url_for(forum_info))
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Message.description, num=i.Message.floor) for i in
              messages]
-    return render_template('forumInfo.html', Total=total)
+    return render_template('forumInfo.html', Total=total, form=form)
 
 
 @app.route('/homework.html')
@@ -290,7 +292,8 @@ def mediaDemo():
     class Info:
         def __init__(self):
             self.url = '../static/uploads/movie.ogg'
-    return render_template('mediaDemo.html',row = Info())
+
+    return render_template('mediaDemo.html', row=Info())
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
