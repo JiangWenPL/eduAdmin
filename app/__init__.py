@@ -16,8 +16,9 @@ lm.init_app(app)
 DEBUGGING = False
 
 
-app.config['UPLOADED_PHOTO_DEST'] = os.path.dirname(os.path.abspath(__file__))
+app.config['UPLOADED_PHOTO_DEST'] = os.path.dirname(os.path.abspath(__file__)) + '/static/uploads/'
 app.config['UPLOADED_PHOTO_ALLOW'] = IMAGES
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 photos = UploadSet('PHOTO')
 
 configure_uploads(app, photos)
