@@ -184,8 +184,28 @@ def forum():
     if course_id:
         posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
             desc(Post.create_time)).limit(10).all()
-    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
     return render_template('forum.html', Total=total, Courses=Course.query.all())
+
+
+@app.route('/forumInfo.html')
+@login_required
+def forum_info():
+    post_id = request.args.get('post_id', None)
+    if not post_id:
+        flash('Please select a post', 'error')
+        redirect(url_for(forum))
+    try:
+        messages = db.session.query(User, Message).join(Message).filter(Message.post_id == int(post_id)).order_by(
+            desc(Message.time)).all()
+    except Exception as e:
+        if DEBUGGING:
+            flash(e, 'error')
+            print(e)
+        return redirect(url_for(forum_info))
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Message.description, num=i.Message.floor) for i in
+             messages]
+    return render_template('forumInfo.html', Total=total)
 
 
 @app.route('/homework.html')
