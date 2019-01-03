@@ -10,7 +10,7 @@ from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
-from sqlalchemy import func
+from sqlalchemy import func, desc
 import json
 import requests
 
@@ -186,41 +186,55 @@ def forum():
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
     return render_template('forum.html', Total=total, Courses=Course.query.all())
 
+
 @app.route('/forumInfo.html')
 @login_required
 def forumInfo():
     return render_template('forumInfo.html')
 
-@app.route('/homework.html')
+
+@app.route('/homework.html', methods=['GET', 'POST'])
 @login_required
 def homework():
-    form = HomeworkForm()
-
     class CourseInfo:
         def __init__(self, name, id):
             self.name = name
             self.id = id
 
     class HomeworkInfo:
-        def __init__(self, name, grade):
+        def __init__(self, name, grade, homework_id):
             self.name = name
             # self.url = "homeworkDemo.html"
             self.grade = grade
+            self.homework_id = homework_id
 
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
 
     courses = []
     for taking in takings:
         course = Course.query.filter_by(id=taking.course_id).first()
-        print(course.name)
-        courses = courses.append(course)
+        # print(course.name)
+        courses.append(course)
+        # print(type(courses))
 
     total0 = []
-    # for course in courses:
-    #     onecourse = CourseInfo(course.name, course.id)
-    #     total0.append(onecourse)
+    for course in courses:
+        # pass
+        onecourse = CourseInfo(course.name, course.id)
+        total0.append(onecourse)
 
-    return render_template('homework.html', Total=[HomeworkInfo()] * 10)
+    form = HomeworkForm()
+    total = []
+    if form.validate_on_submit():
+
+        course_id = form.course_id.data
+        homeworks = Homework.query.filter_by(course_id=course_id).all()
+
+        for homework in homeworks:
+            studentHomework = StudentHomework.query.filter_by(student_id=g.user.id).first()
+            if studentHomework.homework_id == homework.id:
+                total.append(HomeworkInfo(homework.name, studentHomework.grade, str(homework.id)))
+    return render_template('homework.html', Total0=total0, Total=total, form=form)
 
 
 @app.route('/homeworkDemo.html')
@@ -260,6 +274,7 @@ def media():
 @login_required
 def mediaDemo():
     return render_template('mediaDemo.html')
+
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
