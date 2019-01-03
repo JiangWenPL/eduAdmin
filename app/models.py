@@ -143,6 +143,7 @@ class Post(db.Model):
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     # a course is corresponding to a module
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
+    create_time = db.Column(db.DateTime, default=datetime.now())
 
     def __init__(self, post_topic, user_id, course_id):
         self.post_topic = post_topic
@@ -175,7 +176,8 @@ class Message(db.Model):  # A floor in a post
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
     db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))
-    db.session.add(Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
+    db.session.add(
+        Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))

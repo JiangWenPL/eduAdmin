@@ -167,13 +167,24 @@ def courseDemo():
 @app.route('/forum.html')
 @login_required
 def forum():
-    class Total:
-        def __init__(self):
-            self.name = 'This is name'
-            self.id = 'This is id'
-            self.details = 'This is details balabala'
+    # class Total:
+    #     def __init__(self):
+    #         self.name = 'This is name'
+    #         self.id = 'This is id'
+    #         self.details = 'This is details balabala'
 
-    return render_template('forum.html', Total=[Total()] * 10, Courses=Course.query.all())
+    course_id = request.args.get('course_id', None)
+    if not course_id:
+        if g.user.user_type == 'student':
+            course_id = TakingClass.query.filter_by(student_id=g.user.get_id()).one().course_id
+        else:
+            course_id = Course.query.filter_by(teacher_id=g.user.get_id()).one().id
+    posts = list()
+    if course_id:
+        posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
+            desc(Post.create_time)).limit(10).all()
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
+    return render_template('forum.html', Total=total, Courses=Course.query.all())
 
 @app.route('/forumInfo.html')
 @login_required
@@ -209,17 +220,7 @@ def homework():
     #     onecourse = CourseInfo(course.name, course.id)
     #     total0.append(onecourse)
 
-    total = []
-    # if form.validate_on_submit():
-    #     # homeworks = []
-    #     course_id = form.course_id.data
-    #     homeworks = Homework.query.filter_by(course_id=course_id).all()
-    #
-    #     for homework in homeworks:
-    #         studentHomework = StudentHomework.query.filter_by(student_id=g.user.id, homework_id=homework.id).first()
-    #         total.append(HomeworkInfo(homework.name, studentHomework.grade))
-
-    return render_template('homework.html', Total0=total0, Total=total)
+    return render_template('homework.html', Total=[HomeworkInfo()] * 10)
 
 
 @app.route('/homeworkDemo.html')
