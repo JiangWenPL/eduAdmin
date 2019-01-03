@@ -41,3 +41,6 @@ class AddStudentForm(FlaskForm):
     picture = FileField('upload', validators=[FileRequired()])
     submit = SubmitField('submit')
 
+
+class HomeworkForm(FlaskForm):
+    course_id = StringField("course_id", validators=[DataRequired()])

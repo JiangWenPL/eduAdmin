@@ -179,6 +179,14 @@ def forum():
 @app.route('/homework.html')
 @login_required
 def homework():
+
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+
+
     class HomeworkInfo:
         def __init__(self):
             self.name = 'This is name'
@@ -194,7 +202,8 @@ def homework():
         homeworks.extend(homework)
 
 
-    return render_template('homework.html', Total=[HomeworkInfo()] * 10)
+
+    return render_template('homework.html', Total0=[], Total=[])
 
 
 @app.route('/homeworkDemo.html')
