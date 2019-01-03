@@ -144,12 +144,23 @@ def contact():
 @app.route('/courseDemo.html')
 @login_required
 def courseDemo():
-    class CourseInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = 'This id details balabala'
+    try:
+        course_id = request.args.get('course_id')
+    except:
+        flash("Please specify course_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+    # print(course_id
+    course = Course.query.filter_by(id=course_id).first()
 
-    return render_template('courseDemo.html', courseInfo=CourseInfo())
+    class CourseInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
 @app.route('/forum.html')
@@ -300,3 +311,26 @@ def logout():
     logout_user()  # 登出用户
     flash("Logout successful", category='success')
     return redirect(url_for('index'))
+
+
+@app.route('/teacherInfo.html', methods=['GET', 'POST'])
+def teacherInfo():
+    try:
+        teacher_id = request.args.get('teacher_id')
+    except:
+        flash("Please specify teacher_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+
+    teacher = User.query.filter_by(id=teacher_id).first()
+    print(teacher)
+
+    class TeachInfo:
+        def __init__(self, name, details, email):
+            self.name = name
+            self.details = details
+            self.email = email
+
+    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email))
