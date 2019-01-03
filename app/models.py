@@ -23,6 +23,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(32))
     user_type = db.Column(db.String(32))
     email = db.Column(db.String(32))
+    description = db.Column(db.String(256))
 
     def is_authenticated(self):
         return True
@@ -43,6 +44,7 @@ class User(db.Model):
         self.email = email
         self.user_type = user_type
         self.is_root = is_root
+        self.description = ''
 
     @property
     def password(self):

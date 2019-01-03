@@ -144,12 +144,23 @@ def contact():
 @app.route('/courseDemo.html')
 @login_required
 def courseDemo():
-    class CourseInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = 'This id details balabala'
+    try:
+        course_id = request.args.get('course_id')
+    except:
+        flash("Please specify course_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+    # print(course_id
+    course = Course.query.filter_by(id=course_id).first()
 
-    return render_template('courseDemo.html', courseInfo=CourseInfo())
+    class CourseInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
 @app.route('/forum.html')
