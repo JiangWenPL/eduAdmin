@@ -10,9 +10,10 @@ from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
-from sqlalchemy import func
+from sqlalchemy import func, desc
 import json
 import requests
+from easydict import EasyDict
 
 Bootstrap(app)
 
@@ -167,12 +168,24 @@ def courseDemo():
 @app.route('/forum.html')
 @login_required
 def forum():
-    class Total:
-        def __init__(self):
-            self.name = 'This is name'
-            self.id = 'This is id'
-            self.details = 'This is details balabala'
-    return render_template('forum.html', Total=[Total()] * 10, Courses=Course.query.all())
+    # class Total:
+    #     def __init__(self):
+    #         self.name = 'This is name'
+    #         self.id = 'This is id'
+    #         self.details = 'This is details balabala'
+
+    course_id = request.args.get('course_id', None)
+    if not course_id:
+        if g.user.user_type == 'student':
+            course_id = TakingClass.query.filter_by(student_id=g.user.get_id()).one().course_id
+        else:
+            course_id = Course.query.filter_by(teacher_id=g.user.get_id()).one().id
+    posts = list()
+    if course_id:
+        posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
+            desc(Post.create_time)).limit(10).all()
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
+    return render_template('forum.html', Total=total, Courses=Course.query.all())
 
 
 @app.route('/homework.html')
