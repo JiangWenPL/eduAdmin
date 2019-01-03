@@ -6,7 +6,7 @@ from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
 from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
-from app.forms import LoginForm, SignUpForm, AddCourseForm
+from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
@@ -245,7 +245,34 @@ def signUp():
 @app.route('/TcourseDemo.html')
 @login_required
 def TcourseDemo():
-    return render_template('TcourseDemo.html')
+    try:
+        course_id = request.args.get('course_id')
+    except:
+        flash("Please specify course_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+    # print(course_id
+    course = Course.query.filter_by(id=course_id).first()
+
+    class CourseInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    form = AddStudentForm()
+    if form.validate_on_submit():
+        try:
+            print('TcourseDemo')
+            filename = secure_filename(form.upload.data.filename)
+
+        except Exception as e:
+            flash(e, 'danger')
+
+
+
+    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
 @app.route('/Thomework.html')
@@ -325,6 +352,12 @@ def teacherInfo():
             redirect(url_for(Tindex))
 
     teacher = User.query.filter_by(id=teacher_id).first()
+    if teacher is None:
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+
     print(teacher)
 
     class TeachInfo:

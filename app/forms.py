@@ -35,3 +35,8 @@ class AddCourseForm(FlaskForm):
     time = StringField("time", validators=[DataRequired()])
     picture = FileField('picture', validators=[FileRequired()])
     submit = SubmitField('submit')
+
+
+class AddStudentForm(FlaskForm):
+    picture = FileField('upload', validators=[FileRequired()])
+    submit = SubmitField('submit')
