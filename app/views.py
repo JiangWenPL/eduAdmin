@@ -283,7 +283,7 @@ def Thomework():
     return render_template('Thomework.html')
 
 
-@app.route('/Tinfo.html')
+@app.route('/TInfo.html')
 @login_required
 def Tinfo():
     return render_template('Tinfo.html')
