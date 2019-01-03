@@ -172,37 +172,54 @@ def forum():
             self.name = 'This is name'
             self.id = 'This is id'
             self.details = 'This is details balabala'
+
     return render_template('forum.html', Total=[Total()] * 10, Courses=Course.query.all())
 
+@app.route('/forumInfo.html')
+@login_required
+def forumInfo():
+    return render_template('forumInfo.html')
 
 @app.route('/homework.html')
 @login_required
 def homework():
+    form = HomeworkForm()
 
     class CourseInfo:
         def __init__(self, name, id):
             self.name = name
             self.id = id
 
-
-
     class HomeworkInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.url = "homeworkDemo.html"
-            self.grade = 99
+        def __init__(self, name, grade):
+            self.name = name
+            # self.url = "homeworkDemo.html"
+            self.grade = grade
 
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
 
-    homeworks = []
+    courses = []
     for taking in takings:
         course = Course.query.filter_by(id=taking.course_id).first()
-        homework = Homework.query.filter_by(course_id=course.id).all()
-        homeworks.extend(homework)
+        print(course.name)
+        courses = courses.append(course)
 
+    total0 = []
+    # for course in courses:
+    #     onecourse = CourseInfo(course.name, course.id)
+    #     total0.append(onecourse)
 
+    total = []
+    # if form.validate_on_submit():
+    #     # homeworks = []
+    #     course_id = form.course_id.data
+    #     homeworks = Homework.query.filter_by(course_id=course_id).all()
+    #
+    #     for homework in homeworks:
+    #         studentHomework = StudentHomework.query.filter_by(student_id=g.user.id, homework_id=homework.id).first()
+    #         total.append(HomeworkInfo(homework.name, studentHomework.grade))
 
-    return render_template('homework.html', Total0=[], Total=[])
+    return render_template('homework.html', Total0=total0, Total=total)
 
 
 @app.route('/homeworkDemo.html')
@@ -237,6 +254,11 @@ def media():
 
     return render_template('media.html', Total=[Info()] * 10)
 
+
+@app.route('/mediaDemo.html')
+@login_required
+def mediaDemo():
+    return render_template('mediaDemo.html')
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
