@@ -49,12 +49,13 @@ def load_user(uid):
 
 
 class Total:
-    def __init__(self, name, teacher, time, imgUPL, courseDetail):
+    def __init__(self, name, teacher, time, imgUPL, courseDetail, id):
         self.name = name
         self.teacher = teacher
         self.time = time
         self.imgURL = imgUPL
         self.courseDetail = courseDetail
+        self.id = id
 
 
 @app.route('/index.html')
@@ -85,7 +86,7 @@ def index():
 
     total = []
     for course in courses:
-        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description)
+        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description, course.id)
         total.append(onecourse)
     return render_template("index.html", Total=total)
 
@@ -102,7 +103,7 @@ def Tindex():
     courses = Course.query.filter_by(teacher_id=g.user.id).all()
     total = []
     for course in courses:
-        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description)
+        onecourse = Total(course.name, course.teacher_id, course.time, course.course_url, course.description, course.id)
         total.append(onecourse)
 
     if form.validate_on_submit():
@@ -266,11 +267,12 @@ def TcourseDemo():
         try:
             print('TcourseDemo')
             filename = secure_filename(form.upload.data.filename)
+            for line in form.upload.data:
+                line = form.upload.data.readline()
+
 
         except Exception as e:
             flash(e, 'danger')
-
-
 
     return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
