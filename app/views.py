@@ -173,7 +173,7 @@ def forum():
     #         self.name = 'This is name'
     #         self.id = 'This is id'
     #         self.details = 'This is details balabala'
-
+    form = AddPostForm()
     course_id = request.args.get('course_id', None)
     if not course_id:
         if g.user.user_type == 'student':
@@ -185,7 +185,7 @@ def forum():
         posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
             desc(Post.create_time)).limit(10).all()
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
-    return render_template('forum.html', Total=total, Courses=Course.query.all())
+    return render_template('forum.html', Total=total, Courses=Course.query.all(), form=form)
 
 
 @app.route('/forumInfo.html', methods=['GET', 'POST'])
