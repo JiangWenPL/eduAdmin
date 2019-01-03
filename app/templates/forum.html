@@ -1,4 +1,4 @@
-{% set current_page='论坛' %}
+{% set current_page='Forum' %}
 {% extends 'base.html' %}
 {% block body %}
     <div class="contact_form">
@@ -7,9 +7,12 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <label class="sr-only">Which course?</label>
                     <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
-                        <option value="OS">OS</option>
-                        <option value="Java">Java</option>
-                        <option value="SRE">SRE</option>
+                        {% if Total %}
+                            {% for row in Total %}
+                                <option value="{{row.name}}">{{row.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+
                     </select>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
