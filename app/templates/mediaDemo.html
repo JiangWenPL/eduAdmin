@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <!-- Site Metas -->
-<title>登录</title>
+<title>Video</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -38,9 +38,6 @@
       <script src="../static/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="../static/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-</head>
-
 
 <!--[if lt IE 9]>
       <script src="../static/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -84,10 +81,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="info.html">Information</a></li>
                     <li><a href="homework.html">Homework</a></li>
-                    <li><a href="media.html">Media</a></li>
+                    <li><a class="active" href="media.html">Media</a></li>
                     <li><a href="forum.html">Forum</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="/logout">Log Out</a></li>
@@ -108,107 +105,17 @@
 </header>
 
 
-<ul class='slideshow'>
-    <li>
-        <span>Summer</span>
-    </li>
-    <li>
-        <span>Fall</span>
-    </li>
-    <li>
-        <span>Winter</span>
-    </li>
-    <li>
-        <span>Spring</span>
-    </li>
-</ul>
-
-<div class="parallax first-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 wow slideInLeft">
-                <div class="contact_form">
-                    <h3><i class="fa fa-envelope-o grd1 global-radius"></i>login</h3>
-                    <form class="row" action="{{ url_for('login') }}" method="post">
-                        {{ form.hidden_tag() }}
-                        <fieldset class="row-fluid">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <input type="text" name="username" id="username" class="form-control"
-                                       placeholder="User ID">
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <input type="password" name="password" id="password" placeholder="Password"
-                                       required="" class="form-control">
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <input type="text" name="Verification" placeholder="Verification Code" required=""
-                                       class="form-control">
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <img src="../static/uploads/checkCode.png">
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <input type="checkbox" class="btn btn-light btn-radius btn-brd grd1 btn-block"><label class='form-check-label' for=0>remember me</label>
-                                </input>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">login
-                                </button>
-                            </div>
-
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="big-tagline clearfix">
-                    <h2>Wlecome to</h2>
-                    <h2>ZJU online Class</h2>
-                    <p class="lead">This Web is for the learning of some courses in ZJU. Please use your student ID to
-                        enroll.</p>
-                    <a data-scroll class="btn btn-light btn-radius grd1 btn-brd" href="Media.html?user_id='guest'">I'm guest</a>
-                    <a data-scroll class="btn btn-light btn-radius grd1 btn-brd" href="signUp.html">sign up</a>
-                </div>
-            </div>
-        </div><!-- end row -->
-    </div><!-- end container -->
-</div><!-- end section -->
-
-<div class="about-box">
-    <div class="container">
-        <div class="row">
-            <div class="top-feature owl-carousel owl-theme">
-                <div class="item">
-                    <div class="single-feature">
-                        <h4><a href="../static/#">efficient</a></h4>
-                        <p>teaching online</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="single-feature">
-                        <h4><a href="../static/#">convenient</a></h4>
-                        <p>study online</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="single-feature">
-                        <h4><a href="../static/#">light</a></h4>
-                        <p>Web online</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="single-feature">
-                        <h4><a href="../static/#">communication</a></h4>
-                        <p>communicate online</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="hr1">
-
-
-        </div>
+<div class="container ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <video  width="640" height="480" controls="controls" autoplay="autoplay">
+            <source src="../static/uploads/movie.ogg" type="video/ogg" />
+            
+        </video>
     </div>
+</div>
+
+
+
 
 
     <footer class="footer">
