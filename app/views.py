@@ -8,6 +8,7 @@ from flask_bootstrap import Bootstrap
 from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
 from app.forms import LoginForm, SignUpForm, AddCourseForm
 from flask_uploads import *
+from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
 from sqlalchemy import func
 import json
@@ -92,6 +93,9 @@ def index():
 @app.route('/Tindex.html', methods=['GET', 'POST'])
 @login_required
 def Tindex():
+    # Tindex.html?course_id=12341234
+    print(request.data)
+    print(app.config['UPLOADED_PHOTO_DEST'])
     form = AddCourseForm()
     # flash ( 'Hello %s, you have logged in.' % current_user.get_id (), 'success' )
     flash('Hello, test flash', 'success')
@@ -110,12 +114,17 @@ def Tindex():
                 error = 'Course has registered!'
                 return render_template('Tindex.html')
             else:
-                filename = form.picture.data.filename
-                print(filename)
+                # filename = form.picture.data.filename
+                filename = secure_filename(form.picture.data.filename)
+                # print(filename)
+                # print(app.config['UPLOADED_PHOTO_DEST'])
                 # 将上传的文件保存到服务器;
-                form.picture.data.save(filename)
+                # form.picture.data.save(app.config['UPLOADED_PHOTO_DEST'], filename)
+                # os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                form.picture.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
                 db.session.add(
-                    Course(form.courseID.data, form.coursename.data, g.user.id, filename, form.time.data,
+                    Course(form.courseID.data, form.coursename.data, g.user.id,
+                           'static/uploads/' + filename, form.time.data,
                            form.description.data))
                 db.session.commit()
                 print(Course.query.all())
