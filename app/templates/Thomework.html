@@ -10,9 +10,9 @@
                     <label class="sr-only">Which course?</label>
                     <select name="select_price1" id="select_course" class="selectpicker form-control"
                             data-style="btn-white">
-                        {% if Total %}
-                            {% for row in Total %}
-                                <option value="{{row.name}}">{{row.name}}</option>
+                        {% if Total0 %}
+                            {% for row in Total0 %}
+                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
                             {% endfor %}
                         {% endif %}
                     </select>

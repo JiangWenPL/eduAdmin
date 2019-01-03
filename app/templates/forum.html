@@ -7,9 +7,9 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <label class="sr-only">Which course?</label>
                     <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
-                        {% if Total %}
-                            {% for row in Total %}
-                                <option value="{{row.name}}">{{row.name}}</option>
+                        {% if Total0 %}
+                            {% for row in Total0 %}
+                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
                             {% endfor %}
                         {% endif %}
 

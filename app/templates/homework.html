@@ -10,13 +10,13 @@
                             data-style="btn-white">
                         {% if Total0 %}
                             {% for row in Total0 %}
-                                <option value="{{row.name}}">{{row.name}}</option>
+                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
                             {% endfor %}
                         {% endif %}
                     </select>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="submit" onclick="myFunction()"
+                    <button type="submit" 
                             class="btn btn-light btn-radius btn-brd grd1 btn-block">Go
                     </button>
                 </div>
@@ -41,7 +41,7 @@
                         {% if row.grade != -1 %}<font font color="blue">{{ row.grade }}</font>{% endif %}
 
                     </i>
-                    <a href="homeworkDemo.html"><strong>{{ row.name }}</strong></a>
+                    <a href="homeworkDemo.html?homework_id={{row.id}}"><strong>{{ row.name }}</strong></a>
 
                 </div>
             {% endfor %}
