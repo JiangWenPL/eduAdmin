@@ -185,6 +185,15 @@ def homework():
             self.url = "homeworkDemo.html"
             self.grade = 99
 
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+
+    homeworks = []
+    for taking in takings:
+        course = Course.query.filter_by(id=taking.course_id).first()
+        homework = Homework.query.filter_by(course_id=course.id).all()
+        homeworks.extend(homework)
+
+
     return render_template('homework.html', Total=[HomeworkInfo()] * 10)
 
 

@@ -40,3 +40,4 @@ class AddCourseForm(FlaskForm):
 class AddStudentForm(FlaskForm):
     picture = FileField('upload', validators=[FileRequired()])
     submit = SubmitField('submit')
+
