@@ -10,7 +10,7 @@
                             data-style="btn-white">
                         {% if Total %}
                             {% for row in Total %}
-                                <option value="{{row.name}}">{{row.name}}</option>
+                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
                             {% endfor %}
                         {% endif %}
                     </select>

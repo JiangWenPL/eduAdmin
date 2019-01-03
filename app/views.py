@@ -172,8 +172,7 @@ def forum():
             self.name = 'This is name'
             self.id = 'This is id'
             self.details = 'This is details balabala'
-
-    return render_template('forum.html', Total=[Total()] * 10)
+    return render_template('forum.html', Total=[Total()] * 10, Courses=Course.query.all())
 
 
 @app.route('/homework.html')

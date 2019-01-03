@@ -7,11 +7,10 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <label class="sr-only">Which course?</label>
                     <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
-                        {% if Total %}
-                            {% for row in Total %}
-                                <option value="{{row.name}}">{{row.name}}</option>
-                            {% endfor %}
-                        {% endif %}
+                        {% for row in Courses %}
+                            <option value="{{ row.name }}"
+                                    href="/forum.html?course_id={{ row.id }}">{{ row.name }}</option>
+                        {% endfor %}
 
                     </select>
                 </div>
@@ -20,12 +19,6 @@
                 </div>
             </fieldset>
         </form>
-    </div>
-
-
-    <div class="testimonial clearfix">
-        <p><textarea name="content" class="form-control" rows="6"></textarea></p>
-        <button type="button" class="btn btn-light btn-radius grd1 btn-brd">Submit</button>
     </div>
 
 
@@ -42,8 +35,9 @@
                             </h4>
                         </div>
                         <div class="desc">
-                            <h3><i class="fa fa-quote-left"></i> {{ row.details }} <i class="fa fa-quote-right"></i>
-                            </h3>
+                            <a href="forumInfo.html">
+                            <h3>{{ row.details }}</h3>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
