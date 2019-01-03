@@ -1,50 +1,46 @@
-{% set current_page='Homework' %}
 {% extends 'base.html' %}
+{% set current_page='Homework' %}
 {% block body %}
-    <div class="contact_form">
-        <form id="contactform1" class="row" name="contactform" method="post">
-            <fieldset class="row-fluid">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <label class="sr-only">Which course?</label>
-                    <select name="select_price1" id="select_course" class="selectpicker form-control"
-                            data-style="btn-white">
-                        {% if Total0 %}
-                            {% for row in Total0 %}
-                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
-                            {% endfor %}
-                        {% endif %}
-                    </select>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="submit" 
-                            class="btn btn-light btn-radius btn-brd grd1 btn-block">Go
-                    </button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-{% endblock %}
-
-
-
-
+<div class="contact_form">
+    <form id="contactform1" class="row" name="contactform" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset class="row-fluid">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label class="sr-only">Which course?</label>
+                <select name="course_id" id="select_course" class="selectpicker form-control"
+                        data-style="btn-white">
+                    {% if Total0 %}
+                    {% for row in Total0 %}
+                    <option name="course_id" value="{{row.id}}">{{row.name}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button type="submit"
+                        class="btn btn-light btn-radius btn-brd grd1 btn-block">Go
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 
 <div id="testimonials" class="section lb">
     <div class="container">
 
         {% if Total %}
-            {% for row in Total %}
-                <div class="testimonial clearfix">
-                    <i class="fa fa-envelope" aria-hidden="true" style="float:left">
-                        {% if row.grade == -1 %}<font font color="red">new homework!</font>{% endif %}
-                        {% if row.grade != -1 %}<font font color="blue">{{ row.grade }}</font>{% endif %}
+        {% for row in Total %}
+        <div class="testimonial clearfix">
+            <i class="fa fa-envelope" aria-hidden="true" style="float:left">
+                {% if row.grade == -1 %}<font font color="red">new homework!</font>{% endif %}
+                {% if row.grade != -1 %}<font font color="blue">{{ row.grade }}</font>{% endif %}
 
-                    </i>
-                    <a href="homeworkDemo.html?homework_id={{row.id}}"><strong>{{ row.name }}</strong></a>
+            </i>
+            <a href="homeworkDemo.html?homework_id={{row.homework_id}}"><strong>{{ row.name }}</strong></a>
 
-                </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
         {% endif %}
 
         <!-- end testi-meta -->
@@ -52,92 +48,4 @@
 
     </div><!-- end container -->
 </div><!-- end section -->
-
-
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="widget clearfix">
-                    <div class="widget-title">
-                        <img src="../static/images/logos/logo-realestate.png" alt="">
-                    </div>
-                    <p> This course web is designed by G02</p>
-                    <p> Our leader is Jiangtan</p>
-                    <p> Our members are jw, lsc, pw, zxj, xm</p>
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="widget clearfix">
-                    <div class="widget-title">
-                        <h3>Info Link</h3>
-                    </div>
-
-                    <ul class="twitter-widget footer-links">
-                        <li><a href="../static/#"> CC98 </a></li>
-                        <li><a href="../static/#"> ZJU教务管理系统 </a></li>
-                        <li><a href="../static/#"> 本科生院官网</a></li>
-                        <li><a href="../static/#"> ZJU选课系统</a></li>
-                    </ul><!-- end links -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="widget clearfix">
-                    <div class="widget-title">
-                        <h3>Contact Details</h3>
-                    </div>
-
-                    <ul class="footer-links">
-                        <li><a href="../static/#">lisicong97@gmail.com</a></li>
-                        <li>ZJU yuquan campus ***</li>
-                        <li>13800000000</li>
-                    </ul><!-- end links -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-            <div class="col-md-2 col-sm-2 col-xs-12">
-                <div class="widget clearfix">
-                    <div class="widget-title">
-                        <h3>Social</h3>
-                    </div>
-                    <ul class="footer-links">
-                        <li><a href="../static/#"><i class="fa fa-facebook"></i> Facebook</a></li>
-                        <li><a href="../static/#"><i class="fa fa-github"></i> Github</a></li>
-                        <li><a href="../static/#"><i class="fa fa-twitter"></i> Twitter</a></li>
-                    </ul><!-- end links -->
-                </div><!-- end clearfix -->
-            </div><!-- end col -->
-
-        </div><!-- end row -->
-    </div><!-- end container -->
-</footer><!-- end footer -->
-
-<div class="copyrights">
-    <div class="container">
-        <div class="footer-distributed">
-            <div class="footer-right">
-                <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="../static/#">software
-                    requirement class G02</a></p>
-            </div>
-
-
-        </div>
-    </div><!-- end container -->
-</div><!-- end copyrights -->
-
-<a href="../static/#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
-
-<!-- ALL JS FILES -->
-<script src="../static/js/all.js"></script>
-<!-- ALL PLUGINS -->
-<script src="../static/js/custom.js"></script>
-<script src="../static/js/portfolio.js"></script>
-<script src="../static/js/hoverdir.js"></script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-<!-- MAP & CONTACT -->
-<script src="../static/js/map.js"></script>
-
-</body>
-</html>
+{% endblock %}

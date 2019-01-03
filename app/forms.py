@@ -51,5 +51,14 @@ class AddMessageForm(FlaskForm):
 
 
 class AddPostForm(FlaskForm):
+<<<<<<< HEAD
     title = StringField("title", validators=[DataRequired()])
     content = StringField("content")
+=======
+    topic = StringField("topic", validators=[DataRequired()])
+
+
+class UploadHomeworkForm(FlaskForm):
+    file = FileField('upload', validators=[FileRequired()])
+    submit = SubmitField('submit')
+>>>>>>> origin/master

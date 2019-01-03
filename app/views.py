@@ -222,47 +222,70 @@ def forum_info():
     return render_template('forumInfo.html', Total=total, form=form)
 
 
-@app.route('/homework.html')
+@app.route('/homework.html', methods=['GET', 'POST'])
 @login_required
 def homework():
-    form = HomeworkForm()
-
     class CourseInfo:
         def __init__(self, name, id):
             self.name = name
             self.id = id
 
     class HomeworkInfo:
-        def __init__(self, name, grade):
+        def __init__(self, name, grade, homework_id):
             self.name = name
             # self.url = "homeworkDemo.html"
             self.grade = grade
+            self.homework_id = homework_id
 
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
 
     courses = []
     for taking in takings:
         course = Course.query.filter_by(id=taking.course_id).first()
-        print(course.name)
-        courses = courses.append(course)
+        # print(course.name)
+        courses.append(course)
+        # print(type(courses))
 
     total0 = []
-    # for course in courses:
-    #     onecourse = CourseInfo(course.name, course.id)
-    #     total0.append(onecourse)
+    for course in courses:
+        # pass
+        onecourse = CourseInfo(course.name, course.id)
+        total0.append(onecourse)
 
-    return render_template('homework.html', Total=[HomeworkInfo()] * 10)
+    form = HomeworkForm()
+    total = []
+    if form.validate_on_submit():
+
+        course_id = form.course_id.data
+        homeworks = Homework.query.filter_by(course_id=course_id).all()
+
+        for homework in homeworks:
+            studentHomework = StudentHomework.query.filter_by(student_id=g.user.id).first()
+            if studentHomework.homework_id == homework.id:
+                total.append(HomeworkInfo(homework.name, studentHomework.grade, str(homework.id)))
+    return render_template('homework.html', Total0=total0, Total=total, form=form)
 
 
 @app.route('/homeworkDemo.html')
 @login_required
 def homeworkDemo():
-    class HomeworkInfo:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = "fdasfasdfasdfasdfasd"
+    try:
+        homework_id = int(request.args.get('homework_id'))
+    except:
+        flash("Please specify homework_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
 
-    return render_template('homeworkDemo.html', homework=HomeworkInfo())
+    homework = Homework.query.filter_by(id=homework_id).first()
+
+    class HomeworkInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description))
 
 
 @app.route('/info.html')
