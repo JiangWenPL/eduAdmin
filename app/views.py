@@ -10,7 +10,8 @@ from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
-from sqlalchemy import func
+from sqlalchemy import func, desc
+from easydict import EasyDict
 import json
 import requests
 
@@ -183,13 +184,29 @@ def forum():
     if course_id:
         posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
             desc(Post.create_time)).limit(10).all()
-    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
     return render_template('forum.html', Total=total, Courses=Course.query.all())
+
 
 @app.route('/forumInfo.html')
 @login_required
-def forumInfo():
-    return render_template('forumInfo.html')
+def forum_info():
+    post_id = request.args.get('post_id', None)
+    if not post_id:
+        flash('Please select a post', 'error')
+        redirect(url_for(forum))
+    try:
+        messages = db.session.query(User, Message).join(Message).filter(Message.post_id == int(post_id)).order_by(
+            desc(Message.time)).all()
+    except Exception as e:
+        if DEBUGGING:
+            flash(e, 'error')
+            print(e)
+        return redirect(url_for(forum_info))
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Message.description, num=i.Message.floor) for i in
+             messages]
+    return render_template('forumInfo.html', Total=total)
+
 
 @app.route('/homework.html')
 @login_required
@@ -263,6 +280,7 @@ def mediaDemo():
         def __init__(self):
             self.url = '../static/uploads/movie.ogg'
     return render_template('mediaDemo.html',row = Info())
+
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():

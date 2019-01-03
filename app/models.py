@@ -162,6 +162,7 @@ class Message(db.Model):  # A floor in a post
     user_id = db.Column(db.String(32), db.ForeignKey("user.id"))
     description = db.Column(db.String(256))
     floor = db.Column(db.Integer)
+    time = db.Column(db.DateTime, default=datetime.now())
 
     def __init__(self, post_id, user_id, description, floor):
         self.post_id = post_id
@@ -181,4 +182,4 @@ def test_init():
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))
-    db.session.add(Message('1', '316010', 'Can you help me?', 1))
+    db.session.add(Message(1, '316010', 'Can you help me?', 1))
