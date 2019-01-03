@@ -2,26 +2,41 @@
 {% extends 'base.html' %}
 {% block body %}
     <div class="contact_form">
-        <form id="contactform1" class="row" name="contactform" method="post">
-            <fieldset class="row-fluid">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <label class="sr-only">Which course?</label>
-                    <select name="select" id="select_course" class="selectpicker form-control" data-style="btn-white">
-                        {% for row in Courses %}
-                            <option value="{{ row.name }}"
-                                    href="/forum.html?course_id={{ row.id }}">{{ row.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Go</button>
-                </div>
-            </fieldset>
-        </form>
+        {% for row in Courses %}
+            <a href="/forum.html?course_id={{ row.id }}">{{ row.name }}</a>
+        {% endfor %}
+
     </div>
 
+        <div class="container">
+            <form class="row" style="align:center" enctype="multipart/form-data" method="post">
+                {{form.hidden_tag()}}
+                <fieldset class="row-fluid">
 
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="title" name="title" class="form-control"
+                                   placeholder="title">
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <p><textarea name="content" class="form-control" placeholder="details" rows="6"></textarea></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <button type="submit" name="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">
+                                add new post
+                            </button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
 
     <div id="testimonials" class="section lb">
         <div class="container">
@@ -34,7 +49,7 @@
                             </h4>
                         </div>
                         <div class="desc">
-                            <a href="forumInfo.html">
+                            <a href="forumInfo.html?post_id={{ row.post_id }}">
                                 <h3>{{ row.details }}</h3>
                             </a>
                         </div>

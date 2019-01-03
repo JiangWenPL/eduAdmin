@@ -43,4 +43,12 @@ class AddStudentForm(FlaskForm):
 
 
 class HomeworkForm(FlaskForm):
-    course_id = StringField("select_price1", validators=[DataRequired()])
+    course_id = StringField("course_id", validators=[DataRequired()])
+
+
+class AddMessageForm(FlaskForm):
+    content = StringField("content", validators=[DataRequired()])
+
+
+class AddPostForm(FlaskForm):
+    topic = StringField("topic", validators=[DataRequired()])

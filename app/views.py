@@ -11,6 +11,7 @@ from flask_uploads import *
 from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
 from sqlalchemy import func, desc
+from easydict import EasyDict
 import json
 import requests
 
@@ -164,7 +165,7 @@ def courseDemo():
     return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
-@app.route('/forum.html')
+@app.route('/forum.html', methods=['GET', 'POST'])
 @login_required
 def forum():
     # class Total:
@@ -172,7 +173,7 @@ def forum():
     #         self.name = 'This is name'
     #         self.id = 'This is id'
     #         self.details = 'This is details balabala'
-
+    form = AddPostForm()
     course_id = request.args.get('course_id', None)
     if not course_id:
         if g.user.user_type == 'student':
@@ -183,14 +184,40 @@ def forum():
     if course_id:
         posts = db.session.query(User, Post).join(Post).filter(Post.course_id == course_id).order_by(
             desc(Post.create_time)).limit(10).all()
-    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic) for i in posts]
-    return render_template('forum.html', Total=total, Courses=Course.query.all())
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Post.post_topic, post_id=i.Post.id) for i in posts]
+    return render_template('forum.html', Total=total, Courses=Course.query.all(), form=form)
 
 
-@app.route('/forumInfo.html')
+@app.route('/forumInfo.html', methods=['GET', 'POST'])
 @login_required
-def forumInfo():
-    return render_template('forumInfo.html')
+def forum_info():
+    post_id = request.args.get('post_id', None)
+    form = AddMessageForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        try:
+            floor_cnt = Message.query.filter_by(post_id=post_id).count()
+            db.session.add(
+                Message(post_id=post_id, user_id=g.user.get_id(), description=form.content.data, floor=floor_cnt + 1))
+            db.session.commit()
+        except Exception as e:
+            if DEBUGGING:
+                flash(e)
+                print(e)
+    if not post_id:
+        flash('Please select a post', 'error')
+        redirect(url_for(forum))
+    try:
+        messages = db.session.query(User, Message).join(Message).filter(Message.post_id == int(post_id)).order_by(
+            desc(Message.time)).all()
+    except Exception as e:
+        if DEBUGGING:
+            flash(e, 'error')
+            print(e)
+        return redirect(url_for(forum_info))
+    total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Message.description, num=i.Message.floor) for i in
+             messages]
+    return render_template('forumInfo.html', Total=total, form=form)
+
 
 
 @app.route('/homework.html', methods=['GET', 'POST'])
@@ -273,7 +300,11 @@ def media():
 @app.route('/mediaDemo.html')
 @login_required
 def mediaDemo():
-    return render_template('mediaDemo.html')
+    class Info:
+        def __init__(self):
+            self.url = '../static/uploads/movie.ogg'
+
+    return render_template('mediaDemo.html', row=Info())
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
