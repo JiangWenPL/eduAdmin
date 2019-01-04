@@ -19,4 +19,27 @@
 
         </div><!-- end container -->
     </div><!-- end section -->
+
+{% if teacher %}
+    <div class="contact_form">
+    <form class="container" action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="text" name="name" id="name" class="form-control" placeholder="name">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="text" name="email" id="email" class="form-control" placeholder="email">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="text" name="details" id="details" class="form-control" placeholder="details">
+        </div>
+        <div class="container text-center">
+            <button type="submit" class="btn btn-light btn-radius grd1 btn-brd">Submit</button>
+        </div>
+    </form>
+    </div>
+{% endif %}
+
+
+
 {% endblock %}
