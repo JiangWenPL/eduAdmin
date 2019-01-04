@@ -1,24 +1,22 @@
 {% set current_page='Information' %}
 {% extends 'base.html' %}
 {% block body %}
-    <div class="contact_form">
-        <form id="contactform1" class="row" name="contactform" method="post">
-            <fieldset class="row-fluid">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <label class="sr-only">Which course?</label>
-                    <select name="select_price1" id="select_course" class="selectpicker form-control"
-                            data-style="btn-white">
-                        {% if Total %}
-                            {% for row in Total %}
-                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
-                            {% endfor %}
-                        {% endif %}
-                    </select>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Go</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+    <div id="testimonials" class="section lb">
+        <div class="container">
+
+
+            {% if Total %}
+                {% for row in Total %}
+                    <div class="testimonial clearfix">
+                        <div class="testi-meta">
+                            <h4>{{ row.name }}</h4>
+                        </div>
+                        <h3>{{ row.details }}</h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+        </div><!-- end carousel -->
+    </div><!-- end col -->
 {% endblock %}
