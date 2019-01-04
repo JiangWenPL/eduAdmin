@@ -11,7 +11,16 @@
                 </div><!-- end col -->
             </div><!-- end title -->
 
-            <form id="upload-form" action="" method="post" enctype="multipart/form-data">
+            <form class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="upload-form" action="" method="post" enctype="multipart/form-data">
+
+                 <select name="course_id" id="select_course" class="selectpicker form-control"
+                            data-style="btn-white">
+                        {% if Total0 %}
+                            {% for row in Total0 %}
+                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+                </select>
                 　　　 <input type="file" id="upload" name="upload"/> <br/>
                 　　　 <button type="submit" class="btn btn-light btn-radius grd1 btn-brd">upload</button>
             </form>
