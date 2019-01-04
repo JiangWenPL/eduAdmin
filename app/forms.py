@@ -81,3 +81,9 @@ class EditTeacherInfomationForm(FlaskForm):
 class Inform(FlaskForm):
     course_id = StringField('course_id', validators=[DataRequired()])
     content = StringField('content', validators=[DataRequired()])
+
+
+class UploadMediaForm(FlaskForm):
+    upload = FileField('upload', validators=[DataRequired()])
+    course_id = StringField('course_id', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])

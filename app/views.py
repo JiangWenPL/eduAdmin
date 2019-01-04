@@ -536,15 +536,36 @@ def Tinfo():
     return render_template('Tinfo.html', form=form, Total=Total, Total0=Total0)
 
 
-@app.route('/Tmedia.html')
+@app.route('/Tmedia.html', methods=['GET', 'POST'])
 @login_required
 def Tmedia():
-    return render_template('Tmedia.html')
+    form = UploadMediaForm()
+    if form.validate_on_submit():
+        try:
+            filename = secure_filename(form.upload.data.filename)
+            form.picture.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
+            db.session.add(
+                Media(form.name.data, form.course_id.data, 'static/uploads/' + filename))
+            db.session.commit()
+            flash('Upload successful!', 'success')
+        except Exception as e:
+            # flash ( 'login fail', 'primary' )
+            flash(e, 'danger')
 
+    Total = []
 
-# @app.route('/signUpp.html')
-# def signUpp():
-#     return render_template('signUp.html')
+    class MediaInfo:
+        def __init__(self, url, img):
+            self.url = url
+            self.img = img
+
+    courses = Course.query.filter_by(teacher_id=g.user.id).all()
+    for course in courses:
+        medias = Media.query.filter_by(course_id=course.id).all()
+        for media in medias:
+            Total.append(MediaInfo(media.url, course.course_url))
+
+    return render_template('Tmedia.html', Total=Total, form=form)
 
 
 @app.route('/', methods=['GET', 'POST'])
