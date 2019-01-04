@@ -357,17 +357,15 @@ def info():
             self.name = name
             self.id = id
 
-    Total0 = []
     Total = []
     takings = TakingClass.query.filter_by(student_id=g.user.id).all()
     for taking in takings:
         courses = Course.query.filter_by(id=taking.course_id).all()
         for course in courses:
-            Total0.append(CourseInfo(course.name, course.id))
             classInformations = ClassInformation.query.filter_by(course_id=course.id).all()
             for classInformation in classInformations:
                 Total.append(ClassInfo(course.name, classInformation.content))
-    return render_template('info.html', Total=Total, Total0=Total0)
+    return render_template('info.html', Total=Total)
 
 
 @app.route('/media.html')
@@ -376,7 +374,7 @@ def media():
     class Info:
         def __init__(self):
             self.url = 'courseDemo'
-            self.img = "../static/uploads/course_01.jpg"
+            self.img = "../static/uploads/movie.ogg"
 
     return render_template('media.html', Total=[Info()] * 10)
 
@@ -444,7 +442,7 @@ def TcourseDemo():
         except Exception as e:
             flash(e, 'danger')
 
-    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
+    return render_template('TcourseDemo.html', courseInfo=CourseInfo(course.name, course.description), form=form)
 
 
 @app.route('/Thomework.html', methods=['GET', 'POST'])

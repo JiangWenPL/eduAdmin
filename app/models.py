@@ -190,6 +190,20 @@ class ClassInformation(db.Model):
         self.content = content
 
 
+class Media(db.Model):
+    __tablename__ = "Media"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(32))
+    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
+    url = db.Column(db.String(128))
+
+    def __init__(self, name, course_id, url):
+        self.name = name
+        self.course_id = course_id
+        self.url = url
+
+
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
     db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))
