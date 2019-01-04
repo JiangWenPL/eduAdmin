@@ -253,7 +253,6 @@ def homework():
     form = HomeworkForm()
     total = []
     if form.validate_on_submit():
-
         course_id = form.course_id.data
         homeworks = Homework.query.filter_by(course_id=course_id).all()
 
@@ -264,7 +263,7 @@ def homework():
     return render_template('homework.html', Total0=total0, Total=total, form=form)
 
 
-@app.route('/homeworkDemo.html')
+@app.route('/homeworkDemo.html', methods=['GET', 'POST'])
 @login_required
 def homeworkDemo():
     try:
@@ -283,7 +282,24 @@ def homeworkDemo():
             self.name = name
             self.details = details
 
-    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description))
+    form = UploadHomeworkForm()
+    print('vfr')
+    if form.validate_on_submit():
+        try:
+            print('cde')
+            filename = secure_filename(form.upload.data.filename)
+            print(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
+            form.upload.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
+            db.session.add(StudentHomework(homework_id, g.user.id, 'static/uploads/' + filename))
+            db.session.commit()
+            print(StudentHomework.query.all())
+            flash('The Homework is uploaded successfully!')
+            print(url_for('homeworkDemo'))
+            return redirect(url_for('homeworkDemo') + '?homework_id=' + str(homework_id))
+        except Exception as e:
+            flash(e, 'danger')
+    print('nhy')
+    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description), form=form)
 
 
 @app.route('/info.html')
@@ -374,10 +390,24 @@ def TcourseDemo():
     return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
-@app.route('/Thomework.html')
+@app.route('/Thomework.html' ,methods=['GET', 'POST'])
 @login_required
 def Thomework():
-    return render_template('Thomework.html')
+
+    courses = Course.query.filter_by(teacher_id=g.user.id).all()
+    for course in courses:
+        Homework.query.filter_by(course_id=course.id).all()
+
+    form = AddHomeworkForm()
+    if form.validate_on_submit():
+        try:
+            db.session.add(Homework(form.name.data, form.course_id.data, form.content.data, form.deadline.data))
+            db.session.commit()
+            flash('You have just added the homework successfully!', 'success')
+        except Exception as e:
+            flash(e, 'danger')
+
+    return render_template('Thomework.html', form=form)
 
 
 @app.route('/TInfo.html')
