@@ -168,11 +168,6 @@ def courseDemo():
 @app.route('/forum.html', methods=['GET', 'POST'])
 @login_required
 def forum():
-    # class Total:
-    #     def __init__(self):
-    #         self.name = 'This is name'
-    #         self.id = 'This is id'
-    #         self.details = 'This is details balabala'
     form = AddPostForm()
     course_id = request.args.get('course_id', None)
     if not course_id:
@@ -194,6 +189,7 @@ def forum():
 @app.route('/forumInfo.html', methods=['GET', 'POST'])
 @login_required
 def forum_info():
+    title = None
     post_id = request.args.get('post_id', None)
     form = AddMessageForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -210,6 +206,8 @@ def forum_info():
         flash('Please select a post', 'error')
         redirect(url_for('forum'))
     try:
+        post = Post.query.filter_by(id=post_id).one()
+        title = EasyDict(name=post.post_topic, details=post.description)
         messages = db.session.query(User, Message).join(Message).filter(Message.post_id == int(post_id)).order_by(
             desc(Message.time)).all()
     except Exception as e:
@@ -219,7 +217,7 @@ def forum_info():
         return redirect(url_for(forum_info))
     total = [EasyDict(name=i.User.name, id=i.User.id, details=i.Message.description, num=i.Message.floor) for i in
              messages]
-    return render_template('forumInfo.html', Total=total, form=form)
+    return render_template('forumInfo.html', Total=total, Title=title, form=form)
 
 
 @app.route('/homework.html', methods=['GET', 'POST'])
