@@ -64,10 +64,8 @@ class AddHomeworkForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     content = StringField('content', validators=[DataRequired()])
     course_id = StringField('course_id', validators=[DataRequired()])
-    ddl = DateField('ddl', validators=[DateTimeField()])
+    ddl = DateField('ddl', validators=[DataRequired()])
 
 
 class CorrectHomeworkForm(FlaskForm):
-    student_name = StringField('student_name', validators=[DateField()])
-    grade = IntegerField('grade', validators=[DateField()])
-    details = StringField('deetails', validators=[DateField()])
+    grade = IntegerField('grade', validators=[DataRequired()])

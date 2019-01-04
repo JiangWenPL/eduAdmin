@@ -275,7 +275,26 @@ def ThomeworkDemo():
             redirect(url_for(index))
         else:
             redirect(url_for(Tindex))
-    return render_template('homeworkDemo.html', form=form)
+
+    class HomeworkInfo:
+        def __init__(self, name, student_id, details, grade):
+            self.student_name = name
+            self.student_id = student_id
+            self.details = details
+            self.grade = grade
+
+    total = []
+    studentHomeworks = StudentHomework.query.filter_by(homework_id=homework_id).all()
+    homework = Homework.query.filter_by(id=homework_id).first()
+    for studentHomework in studentHomeworks:
+        student = User.query.filter_by(id=studentHomework.student_id).first()
+        total.append(HomeworkInfo(student.name, student.id, homework.description, studentHomework.grade))
+    # total.append(HomeworkInfo())
+
+    # if form.validate_on_submit():
+    #     try:
+
+    return render_template('ThomeworkDemo.html', Total=total, form=form)
 
 
 @app.route('/homeworkDemo.html', methods=['GET', 'POST'])
@@ -298,18 +317,13 @@ def homeworkDemo():
             self.details = details
 
     form = UploadHomeworkForm()
-    print('vfr')
     if form.validate_on_submit():
         try:
-            print('cde')
             filename = secure_filename(form.upload.data.filename)
-            print(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
             form.upload.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
             db.session.add(StudentHomework(homework_id, g.user.id, 'static/uploads/' + filename))
             db.session.commit()
-            print(StudentHomework.query.all())
             flash('The Homework is uploaded successfully!')
-            print(url_for('homeworkDemo'))
             return redirect(url_for('homeworkDemo') + '?homework_id=' + str(homework_id))
         except Exception as e:
             flash(e, 'danger')
@@ -411,6 +425,15 @@ def Thomework():
     total0 = []
     total = []
 
+    form = AddHomeworkForm()
+    if form.validate_on_submit():
+        try:
+            db.session.add(Homework(form.title.data, form.course_id.data, form.content.data, form.ddl.data))
+            db.session.commit()
+            flash('You have just added the homework successfully!', 'success')
+        except Exception as e:
+            flash(e, 'danger')
+
     class CourseInfo:
         def __init__(self, name, id):
             self.name = name
@@ -428,15 +451,6 @@ def Thomework():
         homeworks = Homework.query.filter_by(course_id=course.id).all()
         for homework in homeworks:
             total.append(HomeworkInfo(homework.name, str(homework.id)))
-
-    form = AddHomeworkForm()
-    if form.validate_on_submit():
-        try:
-            db.session.add(Homework(form.title.data, form.course_id.data, form.content.data, form.ddl.data))
-            db.session.commit()
-            flash('You have just added the homework successfully!', 'success')
-        except Exception as e:
-            flash(e, 'danger')
 
     return render_template('Thomework.html', Total0=total0, Total=total, form=form)
 
