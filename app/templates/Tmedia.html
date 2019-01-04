@@ -32,14 +32,18 @@
         <div id="da-thumbs" class="da-thumbs portfolio">
             {% if Total %}
             {% for row in Total %}
-            <div class="post-media_g pitem item-w1 item-h1 cat1">
-                <a href="{{ row.url }}" data-rel="prettyPhoto[gal]">
-                    <img src="{{ row.img }}" alt="" class="img-responsive">
-                    <div>
-                        <i class="flaticon-unlink"></i>
+                    <div class="post-media_g pitem item-w1 item-h1 cat1">
+                    <a href="mediaDemo.html?name={{row.id}}">
+                        <a href="mediaDemo.html?name={{row.id}}" data-rel="prettyPhoto[gal]">
+                            <a href="mediaDemo.html?name={{row.id}}">
+                            <img src="{{ row.img }}" alt="" class="img-responsive"></a>
+                            <div>
+                                <i class="flaticon-unlink"></i>
+                            </div>
+                        </a>
+                    </a>
+                
                     </div>
-                </a>
-            </div>
             {% endfor %}
             {% endif %}
         </div><!-- end portfolio -->
