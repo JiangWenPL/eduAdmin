@@ -177,6 +177,18 @@ class Message(db.Model):  # A floor in a post
         return '<message %r>' % self.id
 
 
+class ClassInformation(db.Model):
+    __tablename__ = "ClassInformation"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
+    content = db.Column(db.String(256))
+
+    def __init__(self, course_id, content):
+        self.course_id = course_id
+        self.content = content
+
+
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
     db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))

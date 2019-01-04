@@ -95,6 +95,7 @@ def index():
 @app.route('/Tindex.html', methods=['GET', 'POST'])
 @login_required
 def Tindex():
+    teacher = True
     # Tindex.html?course_id=12341234
     print(request.data)
     print(app.config['UPLOADED_PHOTO_DEST'])
@@ -544,7 +545,19 @@ def teacherInfo():
         else:
             redirect(url_for(Tindex))
 
-    print(teacher)
+    form = EditTeacherInfomationForm()
+
+    if form.validate_on_submit():
+        try:
+            user = User.query.filter_by(id=g.user.id).first()
+            user.name = form.name.data
+            user.description = form.details.data
+            user.email = form.email.data
+            db.session.commit()
+            print('OK!')
+            redirect(url_for("teacherInfo"))
+        except Exception as e:
+            flash(e, 'danger')
 
     class TeachInfo:
         def __init__(self, name, details, email):
@@ -552,4 +565,5 @@ def teacherInfo():
             self.details = details
             self.email = email
 
-    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email))
+    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email),
+                           teacher=True, form=form)
