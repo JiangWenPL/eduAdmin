@@ -2,57 +2,60 @@
 {% set current_page = "Media" %}
 {% block body %}
 
-    <div id="gallery" class="section wb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 col-md-offset-2">
-                    <h3>Media Center</h3>
-                    <p class="lead">All video and audio you provided are collected here.</p>
-                </div><!-- end col -->
-            </div><!-- end title -->
+<div id="gallery" class="section wb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>Media Center</h3>
+                <p class="lead">All video and audio you provided are collected here.</p>
+            </div><!-- end col -->
+        </div><!-- end title -->
 
-            <form class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="upload-form" action="" method="post" enctype="multipart/form-data">
-
-                 <select name="course_id" id="select_course" class="selectpicker form-control"
-                            data-style="btn-white">
-                        {% if Total0 %}
-                            {% for row in Total0 %}
-                                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
-                            {% endfor %}
-                        {% endif %}
-                </select>
-                　　　 <input type="file" id="upload" name="upload"/> <br/>
-                　　　 <button type="submit" class="btn btn-light btn-radius grd1 btn-brd">upload</button>
-            </form>
-
-
-            <div id="da-thumbs" class="da-thumbs portfolio">
-                {% if Total %}
-                    {% for row in Total %}
-                        <div class="post-media_g pitem item-w1 item-h1 cat1">
-                            <a href="{{ row.url }}" data-rel="prettyPhoto[gal]">
-                                <img src="{{ row.img }}" alt="" class="img-responsive">
-                                <div>
-                                    <i class="flaticon-unlink"></i>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
+        <form class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="upload-form" action="" method="post"
+              enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <select name="course_id" id="select_course" class="selectpicker form-control"
+                    data-style="btn-white">
+                {% if Total0 %}
+                {% for row in Total0 %}
+                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
+                {% endfor %}
                 {% endif %}
-            </div><!-- end portfolio -->
-        </div><!-- end container -->
-    </div><!-- end section -->
-
-    <div id="testimonials" class="section lb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 col-md-offset-2">
-                    <h3>END</h3>
-                    <p class="lead">If there is no material you need, please contact administrater.</p>
-                </div><!-- end col -->
-            </div><!-- end title -->
+            </select>
+            <input type="text" name="name" id="name" class="form-control"
+                   placeholder="name">
+            <input type="file" id="upload" name="upload"/> <br/>　
+            <button type="submit" class="btn btn-light btn-radius grd1 btn-brd">upload</button>
+        </form>
 
 
-        </div><!-- end carousel -->
-    </div><!-- end col -->
+        <div id="da-thumbs" class="da-thumbs portfolio">
+            {% if Total %}
+            {% for row in Total %}
+            <div class="post-media_g pitem item-w1 item-h1 cat1">
+                <a href="{{ row.url }}" data-rel="prettyPhoto[gal]">
+                    <img src="{{ row.img }}" alt="" class="img-responsive">
+                    <div>
+                        <i class="flaticon-unlink"></i>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div><!-- end portfolio -->
+    </div><!-- end container -->
+</div><!-- end section -->
+
+<div id="testimonials" class="section lb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>END</h3>
+                <p class="lead">If there is no material you need, please contact administrater.</p>
+            </div><!-- end col -->
+        </div><!-- end title -->
+
+
+    </div><!-- end carousel -->
+</div><!-- end col -->
 {% endblock %}

@@ -543,7 +543,7 @@ def Tmedia():
     if form.validate_on_submit():
         try:
             filename = secure_filename(form.upload.data.filename)
-            form.picture.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
+            form.upload.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
             db.session.add(
                 Media(form.name.data, form.course_id.data, 'static/uploads/' + filename))
             db.session.commit()
@@ -553,19 +553,26 @@ def Tmedia():
             flash(e, 'danger')
 
     Total = []
+    Total0 = []
 
     class MediaInfo:
         def __init__(self, url, img):
             self.url = url
             self.img = img
 
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
     courses = Course.query.filter_by(teacher_id=g.user.id).all()
     for course in courses:
+        Total0.append(CourseInfo(course.name, course.id))
         medias = Media.query.filter_by(course_id=course.id).all()
         for media in medias:
             Total.append(MediaInfo(media.url, course.course_url))
 
-    return render_template('Tmedia.html', Total=Total, form=form)
+    return render_template('Tmedia.html', Total=Total, Total0=Total0, form=form)
 
 
 @app.route('/', methods=['GET', 'POST'])
