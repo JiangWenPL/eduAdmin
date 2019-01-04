@@ -177,6 +177,19 @@ class Message(db.Model):  # A floor in a post
         return '<message %r>' % self.id
 
 
+class ClassInformation(db.Model):
+    __tablename__ = "ClassInformation"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
+    content = db.Column(db.String(256))
+    time = db.Column(db.DateTime, default=datetime.now())
+
+    def __init__(self, course_id, content):
+        self.course_id = course_id
+        self.content = content
+
+
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
     db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))
@@ -184,6 +197,7 @@ def test_init():
         Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
-    db.session.add(StudentHomework(1, '316010', ''))
+    db.session.add(StudentHomework(1, '316010', '../static/uploads/class2.jpg'))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))
     db.session.add(Message(1, '316010', 'Can you help me?', 1))
+    db.session.add(ClassInformation('cs221', 'Do not forget to submit your homework!'))

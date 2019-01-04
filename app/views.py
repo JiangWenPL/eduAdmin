@@ -5,7 +5,7 @@ from flask import render_template, flash, request, abort, redirect, url_for, g, 
 from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
-from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
+from app.models import *
 from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
@@ -95,6 +95,7 @@ def index():
 @app.route('/Tindex.html', methods=['GET', 'POST'])
 @login_required
 def Tindex():
+    teacher = True
     # Tindex.html?course_id=12341234
     print(request.data)
     print(app.config['UPLOADED_PHOTO_DEST'])
@@ -277,22 +278,35 @@ def ThomeworkDemo():
             redirect(url_for(Tindex))
 
     class HomeworkInfo:
-        def __init__(self, name, student_id, details, grade):
+        def __init__(self, name, student_id, details, grade, url):
             self.student_name = name
             self.student_id = student_id
             self.details = details
             self.grade = grade
+            self.url = url
 
     total = []
     studentHomeworks = StudentHomework.query.filter_by(homework_id=homework_id).all()
     homework = Homework.query.filter_by(id=homework_id).first()
     for studentHomework in studentHomeworks:
         student = User.query.filter_by(id=studentHomework.student_id).first()
-        total.append(HomeworkInfo(student.name, student.id, homework.description, studentHomework.grade))
+        total.append(HomeworkInfo(student.name, student.id, homework.description, studentHomework.grade,
+                                  studentHomework.homework_url))
     # total.append(HomeworkInfo())
 
-    # if form.validate_on_submit():
-    #     try:
+    if form.validate_on_submit():
+        try:
+            student = User.query.filter_by(id=form.student_id.data).first()
+            studentHomeworks = StudentHomework.query.filter_by(homework_id=homework_id).all()
+            for studentHomework in studentHomeworks:
+                if studentHomework.student_id == student.id:
+                    studentHomework.grade = form.grade.data
+                    db.session.commit()
+                    print("marked!")
+                    flash('The Homework is marked successfully!')
+                    return redirect(url_for('ThomeworkDemo') + '?homework_id=' + str(homework_id))
+        except Exception as e:
+            flash(e, 'danger')
 
     return render_template('ThomeworkDemo.html', Total=total, form=form)
 
@@ -327,19 +341,33 @@ def homeworkDemo():
             return redirect(url_for('homeworkDemo') + '?homework_id=' + str(homework_id))
         except Exception as e:
             flash(e, 'danger')
-    print('nhy')
     return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description), form=form)
 
 
 @app.route('/info.html')
 @login_required
 def info():
-    class Info:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = "fdasfasdfasdfasdfasd"
+    class ClassInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
 
-    return render_template('info.html', Total=[Info()] * 10)
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    Total0 = []
+    Total = []
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+    for taking in takings:
+        courses = Course.query.filter_by(id=taking.course_id).all()
+        for course in courses:
+            Total0.append(CourseInfo(course.name, course.id))
+            classInformations = ClassInformation.query.filter_by(course_id=course.id).all()
+            for classInformation in classInformations:
+                Total.append(ClassInfo(course.name, classInformation.content))
+    return render_template('info.html', Total=Total, Total0=Total0)
 
 
 @app.route('/media.html')
@@ -455,10 +483,39 @@ def Thomework():
     return render_template('Thomework.html', Total0=total0, Total=total, form=form)
 
 
-@app.route('/TInfo.html')
+@app.route('/TInfo.html', methods=['GET', 'POST'])
 @login_required
 def Tinfo():
-    return render_template('Tinfo.html')
+    form = Inform()
+    if form.validate_on_submit():
+        try:
+            db.session.add(ClassInformation(form.course_id.data, form.content.data))
+            db.session.commit()
+            flash('You have just added the information successfully!', 'success')
+        except Exception as e:
+            flash(e, 'danger')
+
+    class ClassInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    Total0 = []
+    # courses = Course.query.filter_by(teacher_id=g.user.id).all()
+
+    Total = []
+    courses = Course.query.filter_by(teacher_id=g.user.id).all()
+    for course in courses:
+        Total0.append(CourseInfo(course.name, course.id))
+        classInfomations = ClassInformation.query.filter_by(course_id=course.id).all()
+        for classInfomation in classInfomations:
+            Total.append(ClassInfo(course.name, classInfomation.content))
+    return render_template('Tinfo.html', form=form, Total=Total, Total0=Total0)
 
 
 @app.route('/Tmedia.html')
@@ -532,7 +589,19 @@ def teacherInfo():
         else:
             redirect(url_for(Tindex))
 
-    print(teacher)
+    form = EditTeacherInfomationForm()
+
+    if form.validate_on_submit():
+        try:
+            user = User.query.filter_by(id=g.user.id).first()
+            user.name = form.name.data
+            user.description = form.details.data
+            user.email = form.email.data
+            db.session.commit()
+            print('OK!')
+            redirect(url_for("teacherInfo"))
+        except Exception as e:
+            flash(e, 'danger')
 
     class TeachInfo:
         def __init__(self, name, details, email):
@@ -540,4 +609,5 @@ def teacherInfo():
             self.details = details
             self.email = email
 
-    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email))
+    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email),
+                           teacher=True, form=form)

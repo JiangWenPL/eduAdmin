@@ -3,47 +3,55 @@
 {% block body %}
 
 
+<div id="testimonials" class="section lb">
+    <div class="container">
+        {% if Total %}
+        {%for row in Total%}
+        <div class="testimonial clearfix">
+            <div class="testi-meta">
+                <h4>{{ row.student_id }}</h4>
+            </div>
+            <div class="testi-meta">
+                <h4>{{ row.student_name }}
+                    <small>{{ row.grade }}</small>
+                </h4>
 
-    <div id="testimonials" class="section lb">
-        <div class="container">
-                    {% if Total %}
-                    {%for row in Total%}
-                        <div class="testimonial clearfix">
-                            <div class="testi-meta">
-                                <h4>{{ row.student_id }}
-                            </div>
-                            <div class="testi-meta">
-                                <h4>{{ row.student_name }}<small>- {{ row.grade }}</small></h4>
+                {%if row.grade != -1 %}
+                {{ row.grade }}
+                {%endif%}
 
-                                {%if row.grade != -1 %}
-                                {{ row.grade }}
-                                {%endif%}
-
-                                {%if row.grade == -1 %}
-                                unmarked
-                                {%endif%}
+                {%if row.grade == -1 %}
+                unmarked
+                {%endif%}
 
 
-                            </small></h4>
-                            </div>
-                            <div class="desc ">
-                                <h3> {{ row.details }} </h3>
-                            </div>
-                                <button class="btn btn-light btn-radius grd1 btn-brd col-lg-3 col-md-3 col-sm-3 col-xs-3" type="submit">download</button>
-                            <form class="row" action="{{ url_for('login') }}" method="post">
-                                {{ form.hidden_tag() }}
-                                <fieldset class="row-fluid">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                        <input type="text" name="grade" id="grade" class="form-control"
-                                       placeholder="grade">
-                                    </div>
-                                    <button class="btn btn-light btn-radius grd1 btn-brd col-lg-3 col-md-3 col-sm-3 col-xs-3" type="submit">submit</button>
+                </small></h4>
+            </div>
+            <div class="desc ">
+                <h3> {{ row.details }} </h3>
+            </div>
+            <!--<button class="btn btn-light btn-radius grd1 btn-brd col-lg-3 col-md-3 col-sm-3 col-xs-3" type="submit">-->
+                <!--download-->
+            <!--</button>-->
+            <a href={{ row.url }} download>download</a>
+            <a href={{ row.url }} >preview</a>
+            <form class="row" action="" method="post">
+                {{ form.hidden_tag() }}
+                <fieldset class="row-fluid">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <input type="text" name="grade" id="grade" class="form-control"
+                               placeholder="grade">
+                        <input type="hidden" name=student_id value={{ row.student_id }}>
+                    </div>
+                    <button class="btn btn-light btn-radius grd1 btn-brd col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                            type="submit">submit
+                    </button>
 
-                                </fieldset>
-                             </form>
-                        </div>
-                    {% endfor %}
-                    {% endif %}     
+                </fieldset>
+            </form>
         </div>
+        {% endfor %}
+        {% endif %}
     </div>
+</div>
 {% endblock %}
