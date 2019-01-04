@@ -263,6 +263,21 @@ def homework():
     return render_template('homework.html', Total0=total0, Total=total, form=form)
 
 
+@app.route('/ThomeworkDemo.html', methods=['GET', 'POST'])
+@login_required
+def ThomeworkDemo():
+    form = CorrectHomeworkForm()
+    try:
+        homework_id = int(request.args.get('homework_id'))
+    except:
+        flash("Please specify homework_id")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
+    return render_template('homeworkDemo.html', form=form)
+
+
 @app.route('/homeworkDemo.html', methods=['GET', 'POST'])
 @login_required
 def homeworkDemo():
@@ -390,24 +405,40 @@ def TcourseDemo():
     return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
 
 
-@app.route('/Thomework.html' ,methods=['GET', 'POST'])
+@app.route('/Thomework.html', methods=['GET', 'POST'])
 @login_required
 def Thomework():
+    total0 = []
+    total = []
+
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    class HomeworkInfo:
+        def __init__(self, name, homework_id):
+            self.name = name
+            # self.url = "homeworkDemo.html"
+            self.homework_id = homework_id
 
     courses = Course.query.filter_by(teacher_id=g.user.id).all()
     for course in courses:
-        Homework.query.filter_by(course_id=course.id).all()
+        total0.append(CourseInfo(course.name, course.id))
+        homeworks = Homework.query.filter_by(course_id=course.id).all()
+        for homework in homeworks:
+            total.append(HomeworkInfo(homework.name, str(homework.id)))
 
     form = AddHomeworkForm()
     if form.validate_on_submit():
         try:
-            db.session.add(Homework(form.name.data, form.course_id.data, form.content.data, form.deadline.data))
+            db.session.add(Homework(form.title.data, form.course_id.data, form.content.data, form.ddl.data))
             db.session.commit()
             flash('You have just added the homework successfully!', 'success')
         except Exception as e:
             flash(e, 'danger')
 
-    return render_template('Thomework.html', form=form)
+    return render_template('Thomework.html', Total0=total0, Total=total, form=form)
 
 
 @app.route('/TInfo.html')

@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 # 引入Form元素父类
 from wtforms import StringField, PasswordField, BooleanField, IntegerField, FloatField, SelectField, DecimalField, \
-    SubmitField, TimeField, DateTimeField
+    SubmitField, TimeField, DateTimeField, DateField
 # 引入Form验证父类
 from wtforms.validators import DataRequired, Length, NumberRange, Optional
 from flask_wtf.file import FileField, FileRequired
@@ -61,7 +61,13 @@ class UploadHomeworkForm(FlaskForm):
 
 
 class AddHomeworkForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
+    title = StringField('title', validators=[DataRequired()])
     content = StringField('content', validators=[DataRequired()])
     course_id = StringField('course_id', validators=[DataRequired()])
-    deadline = DateTimeField('deadline', validators=[DateTimeField()])
+    ddl = DateField('ddl', validators=[DateTimeField()])
+
+
+class CorrectHomeworkForm(FlaskForm):
+    student_name = StringField('student_name', validators=[DateField()])
+    grade = IntegerField('grade', validators=[DateField()])
+    details = StringField('deetails', validators=[DateField()])

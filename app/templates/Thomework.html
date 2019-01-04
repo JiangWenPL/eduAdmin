@@ -3,7 +3,8 @@
 {% block body %}
 <div class="contact_form">
     <form class="container" action="" method="post">
-        <select name="select_price1" id="select_course" class="selectpicker form-control"
+        {{ form.hidden_tag() }}
+        <select name="course_id" id="select_course" class="selectpicker form-control"
                             data-style="btn-white">
                         {% if Total0 %}
                             {% for row in Total0 %}
@@ -18,7 +19,7 @@
             <p><textarea name="content" class="form-control" rows="6" placeholder="Homework Details"></textarea></p>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <input type="text" name="ddl" id="ddl" class="form-control" placeholder="deadline">
+            <input type="date" name="ddl" id="ddl" class="form-control" placeholder="deadline">
         </div>
 
         <div class="container text-center">
@@ -38,7 +39,7 @@
                 {% for row in Total %}
                     <div class="testimonial clearfix">
                         <i class="fa fa-envelope" aria-hidden="true" style="float:left"></i>
-                        <a href="ThomeworkDemo.html?Homework_id={{ row.url }}"><strong>{{ row.name }}</strong></a>
+                        <a href="ThomeworkDemo.html?homework_id={{ row.homework_id }}"><strong>{{ row.name }}</strong></a>
                     </div>
                 {% endfor %}
             {% endif %}
