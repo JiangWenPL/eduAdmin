@@ -7,8 +7,8 @@
         {{ form.hidden_tag() }}
         <select name="course_id" id="select_course" class="selectpicker form-control"
                             data-style="btn-white">
-                        {% if Total %}
-                            {% for row in Total %}
+                        {% if Total0 %}
+                            {% for row in Total0 %}
                                 <option name="course_id" value="{{row.id}}">{{row.name}}</option>
                             {% endfor %}
                         {% endif %}
