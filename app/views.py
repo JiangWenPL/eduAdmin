@@ -378,25 +378,47 @@ def info():
 @app.route('/media.html')
 @login_required
 def media():
-    if g.user.user_type == 'teacher':
-        return redirect('Tmedia.html')
+    Total = []
+    Total0 = []
 
-    class Info:
-        def __init__(self):
-            self.url = 'courseDemo'
-            self.img = "../static/uploads/movie.ogg"
+    class MediaInfo:
+        def __init__(self, url, img):
+            self.id = url
+            self.img = img
 
-    return render_template('media.html', Total=[Info()] * 10)
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+    for taking in takings:
+        courses = Course.query.filter_by(id=taking.course_id).all()
+        for course in courses:
+            medias = Media.query.filter_by(course_id=course.id).all()
+            for media in medias:
+                Total.append(MediaInfo(media.url, course.course_url))
+
+    return render_template('media.html', Total=Total)
 
 
 @app.route('/mediaDemo.html')
 @login_required
 def mediaDemo():
-    class Info:
-        def __init__(self):
-            self.url = '../static/uploads/movie.ogg'
+    try:
+        url = request.args.get('name')
+    except:
+        flash("error")
+        if g.user.user_type == 'student':
+            redirect(url_for(index))
+        else:
+            redirect(url_for(Tindex))
 
-    return render_template('mediaDemo.html', row=Info())
+    class Info:
+        def __init__(self, url):
+            self.url = url
+
+    return render_template('mediaDemo.html', row=Info(url))
 
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
@@ -557,7 +579,7 @@ def Tmedia():
 
     class MediaInfo:
         def __init__(self, url, img):
-            self.url = url
+            self.id = url
             self.img = img
 
     class CourseInfo:
