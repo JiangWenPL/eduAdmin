@@ -18,7 +18,7 @@
                     </select>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="submit" onclick="myFunction()"
+                    <button type="submit" 
                             class="btn btn-light btn-radius btn-brd grd1 btn-block">Go
                     </button>
                 </div>
@@ -53,7 +53,7 @@
                 {% for row in Total %}
                     <div class="testimonial clearfix">
                         <i class="fa fa-envelope" aria-hidden="true" style="float:left"></i>
-                        <a href="{{ row.url }}"><strong>{{ row.name }}</strong></a>
+                        <a href="ThomeworkDemo.html?Homework_id={{ row.url }}"><strong>{{ row.name }}</strong></a>
                     </div>
                 {% endfor %}
             {% endif %}
