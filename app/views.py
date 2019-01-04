@@ -5,7 +5,7 @@ from flask import render_template, flash, request, abort, redirect, url_for, g, 
 from app import app, db, lm, DEBUGGING  # , csv_set
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
-from app.models import test_init, User, Course, Homework, TakingClass, StudentHomework, Post, Message
+from app.models import *
 from app.forms import *
 from flask_uploads import *
 from werkzeug.utils import secure_filename
@@ -468,10 +468,40 @@ def Thomework():
     return render_template('Thomework.html', Total0=total0, Total=total, form=form)
 
 
-@app.route('/TInfo.html')
+@app.route('/TInfo.html', methods=['GET', 'POST'])
 @login_required
 def Tinfo():
-    return render_template('Tinfo.html')
+    form = Inform()
+    if form.validate_on_submit():
+        try:
+            db.session.add(ClassInformation(form.course_id.data, form.content.data))
+            db.session.commit()
+            flash('You have just added the information successfully!', 'success')
+        except Exception as e:
+            flash(e, 'danger')
+
+    class ClassInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
+
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    Total0 = []
+    # courses = Course.query.filter_by(teacher_id=g.user.id).all()
+
+
+    Total = []
+    courses = Course.query.filter_by(teacher_id=g.user.id).all()
+    for course in courses:
+        Total0.append(CourseInfo(course.name, course.id))
+        classInfomations = ClassInformation.query.filter_by(course_id=course.id).all()
+        for classInfomation in classInfomations:
+            Total.append(ClassInfo(course.name, classInfomation.content))
+    return render_template('Tinfo.html', form=form, Total=Total)
 
 
 @app.route('/Tmedia.html')

@@ -183,6 +183,7 @@ class ClassInformation(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     course_id = db.Column(db.String(32), db.ForeignKey("course.id"))
     content = db.Column(db.String(256))
+    time = db.Column(db.DateTime, default=datetime.now())
 
     def __init__(self, course_id, content):
         self.course_id = course_id
@@ -199,3 +200,4 @@ def test_init():
     db.session.add(StudentHomework(1, '316010', '../static/uploads/class2.jpg'))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))
     db.session.add(Message(1, '316010', 'Can you help me?', 1))
+    db.session.add(ClassInformation('cs221', 'Do not forget to submit your homework!'))

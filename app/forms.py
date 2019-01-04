@@ -77,3 +77,7 @@ class EditTeacherInfomationForm(FlaskForm):
     email = StringField('email', validators=[DataRequired()])
     details = StringField('details', validators=[DataRequired()])
 
+
+class Inform(FlaskForm):
+    course_id = StringField('course_id', validators=[DataRequired()])
+    content = StringField('content', validators=[DataRequired()])
