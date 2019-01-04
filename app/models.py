@@ -184,6 +184,6 @@ def test_init():
         Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
     db.session.add(TakingClass('cs221', '316010'))
     db.session.add(Homework('MiniCAD', 'cs221', 'A MiniCAD in Java', datetime(2012, 3, 3, 10, 10, 10)))
-    db.session.add(StudentHomework(1, '316010', ''))
+    db.session.add(StudentHomework(1, '316010', '../static/uploads/class2.jpg'))
     db.session.add(Post('The homework is so hard!', '316010', 'cs221'))
     db.session.add(Message(1, '316010', 'Can you help me?', 1))

@@ -277,22 +277,35 @@ def ThomeworkDemo():
             redirect(url_for(Tindex))
 
     class HomeworkInfo:
-        def __init__(self, name, student_id, details, grade):
+        def __init__(self, name, student_id, details, grade, url):
             self.student_name = name
             self.student_id = student_id
             self.details = details
             self.grade = grade
+            self.url = url
 
     total = []
     studentHomeworks = StudentHomework.query.filter_by(homework_id=homework_id).all()
     homework = Homework.query.filter_by(id=homework_id).first()
     for studentHomework in studentHomeworks:
         student = User.query.filter_by(id=studentHomework.student_id).first()
-        total.append(HomeworkInfo(student.name, student.id, homework.description, studentHomework.grade))
+        total.append(HomeworkInfo(student.name, student.id, homework.description, studentHomework.grade,
+                                  studentHomework.homework_url))
     # total.append(HomeworkInfo())
 
-    # if form.validate_on_submit():
-    #     try:
+    if form.validate_on_submit():
+        try:
+            student = User.query.filter_by(id=form.student_id.data).first()
+            studentHomeworks = StudentHomework.query.filter_by(homework_id=homework_id).all()
+            for studentHomework in studentHomeworks:
+                if studentHomework.student_id == student.id:
+                    studentHomework.grade = form.grade.data
+                    db.session.commit()
+                    print("marked!")
+                    flash('The Homework is marked successfully!')
+                    return redirect(url_for('ThomeworkDemo') + '?homework_id=' + str(homework_id))
+        except Exception as e:
+            flash(e, 'danger')
 
     return render_template('ThomeworkDemo.html', Total=total, form=form)
 
@@ -327,7 +340,6 @@ def homeworkDemo():
             return redirect(url_for('homeworkDemo') + '?homework_id=' + str(homework_id))
         except Exception as e:
             flash(e, 'danger')
-    print('nhy')
     return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description), form=form)
 
 
