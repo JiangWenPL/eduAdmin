@@ -12,6 +12,7 @@ from werkzeug.utils import secure_filename
 from sqlalchemy.sql import and_
 from sqlalchemy import func, desc
 from easydict import EasyDict
+import csv
 import json
 import requests
 
@@ -420,7 +421,7 @@ def signUp():
     return render_template('signUp.html', form=form)
 
 
-@app.route('/TcourseDemo.html')
+@app.route('/TcourseDemo.html', methods=['GET', 'POST'])
 @login_required
 def TcourseDemo():
     try:
@@ -442,11 +443,21 @@ def TcourseDemo():
     form = AddStudentForm()
     if form.validate_on_submit():
         try:
-            print('TcourseDemo')
             filename = secure_filename(form.upload.data.filename)
-            for line in form.upload.data:
-                line = form.upload.data.readline()
+            form.upload.data.save(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename))
 
+            csvFile = open(os.path.join(app.config['UPLOADED_PHOTO_DEST'], filename), "r")
+            reader = csv.reader(csvFile)
+            for item in reader:
+                student_id = item[0].replace(' ', '')
+                taking = TakingClass.query.filter_by(student_id=student_id).first()
+                if taking is None:
+                    user = User.query.filter_by(id=student_id).first()
+                    if not user is None and user.user_type == 'student':
+                        db.session.add(TakingClass(course_id, student_id))
+                        print('add!')
+                        db.session.commit()
+            csvFile.close()
 
         except Exception as e:
             flash(e, 'danger')

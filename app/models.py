@@ -206,6 +206,8 @@ class Media(db.Model):
 
 def test_init():
     db.session.add(User('316010', 'Alice', '123', '316010@zju.edu.cn', 'student'))
+    db.session.add(User('315010', 'Bob', '123', '315010@zju.edu.cn', 'student'))
+    db.session.add(User('314010', 'Cindy', '123', '314010@zju.edu.cn', 'student'))
     db.session.add(User('teach001', 'Xingwei', '456', '001@zju.edu.cn', 'teacher'))
     db.session.add(
         Course('cs221', 'NLP', 'teach001', '../static/uploads/class2.jpg', 'Friday', 'This course is very hard.'))
