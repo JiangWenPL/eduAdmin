@@ -10,7 +10,18 @@
                     {%for row in Total%}
                         <div class="testimonial clearfix">
                             <div class="testi-meta">
-                                <h4>{{ row.student_name }}<small>- {{ row.grade }}</small></h4>
+                                <h4>{{ row.student_name }}<small>- 
+
+                                {%if row.grade != -1 %}
+                                {{ row.grade }}
+                                {%endif%}
+
+                                {%if row.grade == -1 %}
+                                unmarked
+                                {%endif%}
+
+
+                            </small></h4>
                             </div>
                             <div class="desc ">
                                 <h3> {{ row.details }} </h3>
