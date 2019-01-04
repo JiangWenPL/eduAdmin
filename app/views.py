@@ -347,12 +347,27 @@ def homeworkDemo():
 @app.route('/info.html')
 @login_required
 def info():
-    class Info:
-        def __init__(self):
-            self.name = 'This is name'
-            self.details = "fdasfasdfasdfasdfasd"
+    class ClassInfo:
+        def __init__(self, name, details):
+            self.name = name
+            self.details = details
 
-    return render_template('info.html', Total=[Info()] * 10)
+    class CourseInfo:
+        def __init__(self, name, id):
+            self.name = name
+            self.id = id
+
+    Total0 = []
+    Total = []
+    takings = TakingClass.query.filter_by(student_id=g.user.id).all()
+    for taking in takings:
+        courses = Course.query.filter_by(id=taking.course_id).all()
+        for course in courses:
+            Total0.append(CourseInfo(course.name, course.id))
+            classInformations = ClassInformation.query.filter_by(course_id=course.id).all()
+            for classInformation in classInformations:
+                Total.append(ClassInfo(course.name, classInformation.content))
+    return render_template('info.html', Total=Total, Total0=Total0)
 
 
 @app.route('/media.html')
@@ -493,7 +508,6 @@ def Tinfo():
     Total0 = []
     # courses = Course.query.filter_by(teacher_id=g.user.id).all()
 
-
     Total = []
     courses = Course.query.filter_by(teacher_id=g.user.id).all()
     for course in courses:
@@ -501,7 +515,7 @@ def Tinfo():
         classInfomations = ClassInformation.query.filter_by(course_id=course.id).all()
         for classInfomation in classInfomations:
             Total.append(ClassInfo(course.name, classInfomation.content))
-    return render_template('Tinfo.html', form=form, Total=Total)
+    return render_template('Tinfo.html', form=form, Total=Total, Total0=Total0)
 
 
 @app.route('/Tmedia.html')
