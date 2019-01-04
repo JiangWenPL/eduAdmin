@@ -224,6 +224,9 @@ def forum_info():
 @app.route('/homework.html', methods=['GET', 'POST'])
 @login_required
 def homework():
+    if g.user.user_type == 'teacher':
+        return redirect('Thomework.html')
+
     class CourseInfo:
         def __init__(self, name, id):
             self.name = name
@@ -347,6 +350,9 @@ def homeworkDemo():
 @app.route('/info.html')
 @login_required
 def info():
+    if g.user.user_type == 'teacher':
+        return redirect('/TInfo.html')
+
     class ClassInfo:
         def __init__(self, name, details):
             self.name = name
@@ -373,6 +379,9 @@ def info():
 @app.route('/media.html')
 @login_required
 def media():
+    if g.user.user_type == 'teacher':
+        return redirect('Tmedia.html')
+
     class Info:
         def __init__(self):
             self.url = 'courseDemo'
