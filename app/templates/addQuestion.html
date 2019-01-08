@@ -107,19 +107,85 @@
 
 
 
+<br><br><br>
+
+<div class="container" id="qwq">
+            <p>Randomized algorithms are for solving the problems with randomly generated inputs. </p>
+            <input name="ques15" type="radio">T &nbsp; &nbsp; &nbsp; &nbsp; 
+            <input checked="" name="ques15" type="radio">F
+</div>
+
+    <div class="contact_form">
+        <form class="container" action="" method="">
+            <fieldset class="row-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" id="question" name="question" class="form-control"
+                               placeholder="question">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" id="answer" name="answer" class="form-control"
+                               placeholder="answer">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" id="answer1" name="answer1" class="form-control"
+                               placeholder="wrong-answer">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" id="answer2" name="answer2" class="form-control"
+                               placeholder="wrong-answer">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" id="answer3" name="answer3" class="form-control"
+                               placeholder="wrong-answer">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button type="" name="" onclick="add()" class="btn btn-light btn-radius btn-brd grd1 btn-block">
+                            add new question
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+<script>
+
+    function add() {
+                    var question = document.getElementById("question").value;
+                    var answer = document.getElementById("answer").value;
+                    var answer1 = document.getElementById("answer1").value;
+                    var answer2 = document.getElementById("answer2").value;
+                    var answer3 = document.getElementById("answer3").value;
+
+                    var whole = document.createElement("p");
+                    para.appendChild(question);
+
+                    var element = document.getElementById("qwq");
+                    element.appendChild(whole);
+
+    }
 
 
-<fieldset class ="question">
-<input type="text"></p>
-<label><input type="radio" name="answer3" value="6" />剑门关</label>
-<br />
-<label><input type="radio" name="answer3" value="0"/>山海关</label>
-<br/>
-<label><input type="radio" name="answer3" value="0"/>嘉峪关</label>
-</fieldset>
+</script>
 
 
 
+<br><br><br>
 
 <footer class="footer">
     <div class="container">
