@@ -60,48 +60,48 @@
         </div><!-- end container -->
 
 <br><br>
-
-        <div class="container text-center">
+    
+        <div class="container ">
+            <div class="col-md-8 col-md-offset-4">
             <form class="row" action="{{ url_for('Tindex') }}" enctype="multipart/form-data" method="post">
                 <!--<form class="row" action="{{ url_for('Tindex') }}" method="post">-->
                 {{ form.hidden_tag() }}
                 <fieldset class="row-fluid">
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="text" id="coursename" name="coursename" class="form-control"
                                    placeholder="course name">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="text" id="description" name="description" class="form-control"
                                    placeholder="description">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="text" id="courseID" name="courseID" class="form-control"
                                    placeholder="course id">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="text" id="time" name="time" class="form-control"
                                    placeholder="time">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="file" id="upload" name="picture"/>
                         </div>
 
-                        <div class="form-inline">add picture</div>
                     </div>
 
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <button type="submit" name="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">
                                 add course
                             </button>
