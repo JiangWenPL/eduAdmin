@@ -676,8 +676,11 @@ def teacherInfo():
             self.name = name
             self.details = details
             self.email = email
-
-    return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email),
+    if g.user.user_type == 'student':
+        return render_template('teacherInfo.html',
+                               teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email), form=form)
+    else:
+        return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email),
                            teacher=True, form=form)
 
 
