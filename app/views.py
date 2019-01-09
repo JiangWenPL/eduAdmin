@@ -22,10 +22,10 @@ Bootstrap(app)
 @app.before_first_request
 def init_view():
     # Uncomment to recreate database every time
-    db.drop_all()
-    db.create_all()  # Do not recreate mysql database.
-    test_init()
-    db.session.commit()
+    # db.drop_all()
+    # db.create_all()  # Do not recreate mysql database.
+    # test_init()
+    # db.session.commit()
 
     print(User.query.all())
     print(Course.query.all())
@@ -330,9 +330,10 @@ def homeworkDemo():
     homework = Homework.query.filter_by(id=homework_id).first()
 
     class HomeworkInfo:
-        def __init__(self, name, details):
+        def __init__(self, name, details, ddl):
             self.name = name
             self.details = details
+            self.ddl = ddl
 
     form = UploadHomeworkForm()
     if form.validate_on_submit():
@@ -345,7 +346,7 @@ def homeworkDemo():
             return redirect(url_for('homeworkDemo') + '?homework_id=' + str(homework_id))
         except Exception as e:
             flash(e, 'danger')
-    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description), form=form)
+    return render_template('homeworkDemo.html', homework=HomeworkInfo(homework.name, homework.description, "deadline:" + str(homework.deadline)), form=form)
 
 
 @app.route('/info.html')
