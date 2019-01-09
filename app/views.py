@@ -160,11 +160,12 @@ def courseDemo():
     course = Course.query.filter_by(id=course_id).first()
 
     class CourseInfo:
-        def __init__(self, name, details):
+        def __init__(self, name, details, time):
             self.name = name
             self.details = details
+            self.time = time
 
-    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description))
+    return render_template('courseDemo.html', courseInfo=CourseInfo(course.name, course.description, course.time))
 
 
 @app.route('/forum.html', methods=['GET', 'POST'])
@@ -356,9 +357,10 @@ def info():
         return redirect('/TInfo.html')
 
     class ClassInfo:
-        def __init__(self, name, details):
+        def __init__(self, name, details, time):
             self.name = name
             self.details = details
+            self.time = time
 
     class CourseInfo:
         def __init__(self, name, id):
@@ -372,7 +374,7 @@ def info():
         for course in courses:
             classInformations = ClassInformation.query.filter_by(course_id=course.id).all()
             for classInformation in classInformations:
-                Total.append(ClassInfo(course.name, classInformation.content))
+                Total.append(ClassInfo(course.name, classInformation.content, str(classInformation.time)))
     return render_template('info.html', Total=Total)
 
 
@@ -383,9 +385,10 @@ def media():
     Total0 = []
 
     class MediaInfo:
-        def __init__(self, url, img):
+        def __init__(self, url, img, name):
             self.id = url
             self.img = img
+            self.name = name
 
     class CourseInfo:
         def __init__(self, name, id):
@@ -398,7 +401,7 @@ def media():
         for course in courses:
             medias = Media.query.filter_by(course_id=course.id).all()
             for media in medias:
-                Total.append(MediaInfo(media.url, course.course_url))
+                Total.append(MediaInfo(media.url, course.course_url, media.name))
 
     return render_template('media.html', Total=Total)
 
@@ -459,9 +462,10 @@ def TcourseDemo():
     course = Course.query.filter_by(id=course_id).first()
 
     class CourseInfo:
-        def __init__(self, name, details):
+        def __init__(self, name, details, time):
             self.name = name
             self.details = details
+            self.time = time
 
     form = AddStudentForm()
     if form.validate_on_submit():
@@ -485,7 +489,7 @@ def TcourseDemo():
         except Exception as e:
             flash(e, 'danger')
 
-    return render_template('TcourseDemo.html', courseInfo=CourseInfo(course.name, course.description), form=form)
+    return render_template('TcourseDemo.html', courseInfo=CourseInfo(course.name, course.description, course.time), form=form)
 
 
 @app.route('/Thomework.html', methods=['GET', 'POST'])
@@ -537,9 +541,10 @@ def Tinfo():
             flash(e, 'danger')
 
     class ClassInfo:
-        def __init__(self, name, details):
+        def __init__(self, name, details, time):
             self.name = name
             self.details = details
+            self.time = time
 
     class CourseInfo:
         def __init__(self, name, id):
@@ -555,7 +560,7 @@ def Tinfo():
         Total0.append(CourseInfo(course.name, course.id))
         classInfomations = ClassInformation.query.filter_by(course_id=course.id).all()
         for classInfomation in classInfomations:
-            Total.append(ClassInfo(course.name, classInfomation.content))
+            Total.append(ClassInfo(course.name, classInfomation.content, str(classInfomation.time)))
     return render_template('Tinfo.html', form=form, Total=Total, Total0=Total0)
 
 
@@ -579,9 +584,10 @@ def Tmedia():
     Total0 = []
 
     class MediaInfo:
-        def __init__(self, url, img):
+        def __init__(self, url, img, name):
             self.id = url
             self.img = img
+            self.name = name
 
     class CourseInfo:
         def __init__(self, name, id):
@@ -593,7 +599,7 @@ def Tmedia():
         Total0.append(CourseInfo(course.name, course.id))
         medias = Media.query.filter_by(course_id=course.id).all()
         for media in medias:
-            Total.append(MediaInfo(media.url, course.course_url))
+            Total.append(MediaInfo(media.url, course.course_url, media.name))
 
     return render_template('Tmedia.html', Total=Total, Total0=Total0, form=form)
 

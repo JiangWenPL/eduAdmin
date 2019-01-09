@@ -1,31 +1,32 @@
 {% extends 'Tbase.html' %}
 {% set current_page='Course' %}
 {% block body %}
-    <div id="features" class="section wb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 col-md-offset-2">
-                    {% if courseInfo %}
-                        <h3>{{ courseInfo.name }}</h3>
-                        <p class="lead">{{ courseInfo.details }}</p>
-                    {% endif %}
-                </div><!-- end col -->
-            </div><!-- end title -->
+<div id="features" class="section wb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 col-md-offset-2">
+                {% if courseInfo %}
+                <h3>{{ courseInfo.name }}</h3>
+                <p class="lead">{{ courseInfo.details }}</p>
+                <p class="lead">{{ courseInfo.time }}</p>
+                {% endif %}
+            </div><!-- end col -->
+        </div><!-- end title -->
 
-            <hr class="invis">
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-md-offset-4">
+        <hr class="invis">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-md-offset-4">
             <form id="upload-form" action="" method="post" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
-                        <div class="section-title row text-center">
-                        <div class="col-md-8 col-md-offset-2">
-                        <p class="lead">Please update student list here(.csv)</p>
-                        </div><!-- end col -->
-                        </div><!-- end title -->
+                <div class="row text-center">
+                    <div class="col-md-8 col-md-offset-2">
+                        <small>Please update student list here(.csv)</small>
+                    </div><!-- end col -->
+                </div><!-- end title -->
                 　　　 <input type="file" id="upload" name="upload"/> <br/>
                 　　　 <input class="btn btn-light btn-radius btn-brd grd1 btn-block" type="submit" value="submit list"/>
             </form>
         </div>
 
-        </div><!-- end container -->
-    </div><!-- end section -->
+    </div><!-- end container -->
+</div><!-- end section -->
 {% endblock %}

@@ -10,42 +10,47 @@
                 <p class="lead">All video and audio you provided are collected here.</p>
             </div><!-- end col -->
         </div><!-- end title -->
-<div class="col-md-offset-4">
-        <form class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="upload-form" action="" method="post"
-              enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <select name="course_id" id="select_course" class="selectpicker form-control"
-                    data-style="btn-white">
-                {% if Total0 %}
-                {% for row in Total0 %}
-                <option name="course_id" value="{{row.id}}">{{row.name}}</option>
-                {% endfor %}
-                {% endif %}
-            </select>
-            <input type="text" name="name" id="name" class="form-control"
-                   placeholder="name">
-            <input type="file" id="upload" name="upload"/> <br/>　
-            <button type="submit" class="btn btn-light btn-radius grd1 btn-brd col-md-offset-3">upload</button>
-        </form>
+        <div class="col-md-offset-4">
+            <form class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="upload-form" action="" method="post"
+                  enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <select name="course_id" id="select_course" class="selectpicker form-control"
+                        data-style="btn-white">
+                    {% if Total0 %}
+                    {% for row in Total0 %}
+                    <option name="course_id" value="{{row.id}}">{{row.name}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <input type="text" name="name" id="name" class="form-control"
+                       placeholder="name">
+                <input type="file" id="upload" name="upload"/> <br/>　
+                <button type="submit" class="btn btn-light btn-radius grd1 btn-brd col-md-offset-3">upload</button>
+            </form>
 
-</div>
-        <div id="da-thumbs" class="da-thumbs portfolio">
-            {% if Total %}
-            {% for row in Total %}
-                    <div class="post-media_g pitem item-w1 item-h1 cat1">
+        </div>
+
+        <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="da-thumbs" class="da-thumbs portfolio">
+                {% if Total %}
+                {% for row in Total %}
+                <div class="post-media_g pitem item-w1 item-h1 cat1">
                     <a href="mediaDemo.html?name={{row.id}}">
                         <a href="mediaDemo.html?name={{row.id}}" data-rel="prettyPhoto[gal]">
-                            <a href="mediaDemo.html?name={{row.id}}">
-                            <img src="{{ row.img }}" alt="" class="img-responsive"></a>
+                            <!--<a href="mediaDemo.html?name={{row.id}}">-->
+                            <a href={{ row.id }}>
+                                <img src="{{ row.img }}" alt="" class="img-responsive"></a>
                             <div>
                                 <i class="flaticon-unlink"></i>
                             </div>
+                            <p>{{ row.name}}</p>
                         </a>
                     </a>
-                
-                    </div>
-            {% endfor %}
-            {% endif %}
+
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
         </div><!-- end portfolio -->
     </div><!-- end container -->
 </div><!-- end section -->

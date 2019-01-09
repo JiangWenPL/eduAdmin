@@ -1,20 +1,21 @@
 {% set current_page='Course' %}
 {% extends 'base.html' %}
 {% block body %}
-    <div id="features" class="section wb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 col-md-offset-2">
-                    {% if courseInfo %}
-                        <h3>{{ courseInfo.name }}</h3>
-                        <p class="lead">{{ courseInfo.details }}</p>
-                    {% endif %}
-                </div><!-- end col -->
-            </div><!-- end title -->
+<div id="features" class="section wb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 col-md-offset-2">
+                {% if courseInfo %}
+                <h3>{{ courseInfo.name }}</h3>
+                <p class="lead">{{ courseInfo.details }}</p>
+                <p class="lead">{{ courseInfo.time }}</p>
+                {% endif %}
+            </div><!-- end col -->
+        </div><!-- end title -->
 
-            <hr class="invis">
+        <hr class="invis">
 
 
-        </div><!-- end container -->
-    </div><!-- end section -->
+    </div><!-- end container -->
+</div><!-- end section -->
 {% endblock %}
