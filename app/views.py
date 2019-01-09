@@ -22,10 +22,10 @@ Bootstrap(app)
 @app.before_first_request
 def init_view():
     # Uncomment to recreate database every time
-    # db.drop_all()
-    # db.create_all()  # Do not recreate mysql database.
-    # test_init()
-    # db.session.commit()
+    db.drop_all()
+    db.create_all()  # Do not recreate mysql database.
+    test_init()
+    db.session.commit()
 
     print(User.query.all())
     print(Course.query.all())
@@ -440,6 +440,7 @@ def signUp():
                 db.session.add(
                     User(form.user.data, form.name.data, form.password.data, form.email.data, form.userType.data))
                 db.session.commit()
+                flash("successful", "success")
         except Exception as e:
             flash(e, 'danger')
 
@@ -484,6 +485,7 @@ def TcourseDemo():
                         db.session.add(TakingClass(course_id, student_id))
                         print('add!')
                         db.session.commit()
+                        flash("successful", "success")
             csvFile.close()
 
         except Exception as e:

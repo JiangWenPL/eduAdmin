@@ -205,15 +205,15 @@ class Media(db.Model):
 
 
 def test_init():
-    db.session.add(User('000001', 'Alice', '123', '000001@zju.edu.cn', 'student'))
-    db.session.add(User('000002', 'Bob', '123', '000002@zju.edu.cn', 'student'))
-    db.session.add(User('000003', 'Cindy', '123', '000003@zju.edu.cn', 'student'))
+    db.session.add(User('200001', 'Alice', '123', '000001@zju.edu.cn', 'student'))
+    db.session.add(User('200002', 'Bob', '123', '000002@zju.edu.cn', 'student'))
+    db.session.add(User('200003', 'Cindy', '123', '000003@zju.edu.cn', 'student'))
     db.session.add(User('100001', 'Mr. Li', '123', '100001@zju.edu.cn', 'teacher'))
     db.session.add(
         Course('cs001', 'Java应用技术', '100001', '../static/uploads/class2.jpg', 'Monday 8:00', 'This course will teach Java.'))
-    db.session.add(TakingClass('cs001', '000001'))
+    db.session.add(TakingClass('cs001', '200001'))
     db.session.add(Homework('MiniCAD', 'cs001', 'A MiniCAD in Java', datetime(2019, 2, 1, 10, 10, 10)))
-    db.session.add(StudentHomework(1, '000001', '../static/uploads/class2.jpg'))
-    db.session.add(Post('The homework is so hard!', '000001', 'cs001'))
-    db.session.add(Message(1, '000001', 'Can you help me?', 1))
+    db.session.add(StudentHomework(1, '200001', '../static/uploads/class2.jpg'))
+    db.session.add(Post('The homework is so hard!', '200001', 'cs001'))
+    db.session.add(Message(1, '200001', 'Can you help me?', 1))
     db.session.add(ClassInformation('cs001', 'Do not forget to submit your homework!'))
