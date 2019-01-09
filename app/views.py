@@ -679,3 +679,14 @@ def teacherInfo():
 
     return render_template('teacherInfo.html', teachInfo=TeachInfo(teacher.name, teacher.description, teacher.email),
                            teacher=True, form=form)
+
+
+def test_login_logout(self):
+    user = self.login('admin', 'default')
+    assert 'You were logged in' in user.data
+    user = self.logout()
+    assert 'You were logged out' in user.data
+    user = self.login('adminx', 'default')
+    assert 'You should log in' in user.data
+
+
