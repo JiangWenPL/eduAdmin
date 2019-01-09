@@ -10,8 +10,8 @@
                 <p class="lead">All video and audio you provided are collected here.</p>
             </div><!-- end col -->
         </div><!-- end title -->
-
-        <form class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="upload-form" action="" method="post"
+<div class="col-md-offset-4">
+        <form class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="upload-form" action="" method="post"
               enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <select name="course_id" id="select_course" class="selectpicker form-control"
@@ -25,10 +25,10 @@
             <input type="text" name="name" id="name" class="form-control"
                    placeholder="name">
             <input type="file" id="upload" name="upload"/> <br/>　
-            <button type="submit" class="btn btn-light btn-radius grd1 btn-brd">upload</button>
+            <button type="submit" class="btn btn-light btn-radius grd1 btn-brd col-md-offset-3">upload</button>
         </form>
 
-
+</div>
         <div id="da-thumbs" class="da-thumbs portfolio">
             {% if Total %}
             {% for row in Total %}
