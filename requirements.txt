@@ -1,0 +1,7 @@
+flask
+flask-login
+flask_sqlalchemy
+easydict
+flask-uploads
+requests
+flask-bootstrap
