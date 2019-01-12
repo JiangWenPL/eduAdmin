@@ -2,5 +2,5 @@
 __author__ = u'Jiang Wen'
 from app import app
 
-app.run(debug=True, host='127.0.0.1', port=8080)
+app.run(debug=False, host='10.76.6.174', port=9988)
 
