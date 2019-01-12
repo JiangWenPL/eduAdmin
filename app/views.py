@@ -264,7 +264,7 @@ def homework():
 
         for homework in homeworks:
             studentHomework = StudentHomework.query.filter_by(student_id=g.user.id).first()
-            if studentHomework.homework_id == homework.id:
+            if not studentHomework is None and studentHomework.homework_id == homework.id:
                 total.append(HomeworkInfo(homework.name, studentHomework.grade, str(homework.id)))
     return render_template('homework.html', Total0=total0, Total=total, form=form)
 
