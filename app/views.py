@@ -561,7 +561,7 @@ def Tinfo():
         classInfomations = ClassInformation.query.filter_by(course_id=course.id).all()
         for classInfomation in classInfomations:
             Total.append(ClassInfo(course.name, classInfomation.content, str(classInfomation.time)))
-    return render_template('Tinfo.html', form=form, Total=Total, Total0=Total0)
+    return render_template('TInfo.html', form=form, Total=Total, Total0=Total0)
 
 
 @app.route('/Tmedia.html', methods=['GET', 'POST'])
